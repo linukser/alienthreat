@@ -535,12 +535,12 @@ while True:
 				#remember to increase this after adding new bonus to the game !!!
 				which_one = random.randint(0, 8)
 
-				random_x = random.randint(150, game.map_size_x - 150)
-				random_y = random.randint(150, game.map_size_y - 150 - game.screen_bottom)
+				random_x = random.randint(200, game.map_size_x - 200)
+				random_y = random.randint(200, game.map_size_y - 200 - game.screen_bottom)
 				
 				while game.pixel_table[random_x][random_y] == 1:
-					random_x = random.randint(150, game.map_size_x - 150)
-					random_y = random.randint(150, game.map_size_y - 150 - game.screen_bottom)
+					random_x = random.randint(200, game.map_size_x - 200)
+					random_y = random.randint(200, game.map_size_y - 200 - game.screen_bottom)
 			
 				if which_one == 5: #vortex
 					game.add_new_bonus(which_one, random_x, random_y, 100)
@@ -583,12 +583,12 @@ while True:
 				#remember to increase this after adding new bonus to the game !!!
 				which_one = random.randint(0, 8)
 
-				random_x = random.randint(150, game.map_size_x - 150)
-				random_y = random.randint(150, game.map_size_y - 150)
+				random_x = random.randint(200, game.map_size_x - 200)
+				random_y = random.randint(200, game.map_size_y - 200)
 				
 				while game.pixel_table[random_x][random_y] == 1:
-					random_x = random.randint(150, game.map_size_x - 150)
-					random_y = random.randint(150, game.map_size_y - 150)
+					random_x = random.randint(200, game.map_size_x - 200)
+					random_y = random.randint(200, game.map_size_y - 200)
 			
 				if which_one == 5: #vortex
 					pass
@@ -1211,14 +1211,14 @@ while True:
 			
 		for gigantula in monster.gigantulas:
 			if gigantula.energy > 0:
-				if (gigantula.x + gigantula.offsetX) >= 100 and (gigantula.x + gigantula.offsetX) < (game.map_size_x - 100):
+				if (gigantula.x + gigantula.offsetX) >= 200 and (gigantula.x + gigantula.offsetX) < (game.map_size_x - 200):
 					if game.pixel_table[gigantula.x + gigantula.offsetX][gigantula.y + gigantula.offsetY] == 0:
 						# print "x"
 						# print "gigantula.x + gigantula.offsetX = ", gigantula.x + gigantula.offsetX
 						# print "gigantula.y + gigantula.offsetY = ", gigantula.y + gigantula.offsetY
 						gigantula.x += gigantula.offsetX
 				
-				if (gigantula.y + gigantula.offsetY) >= 100 and (gigantula.y + gigantula.offsetY) < (game.map_size_y - 150 - game.screen_bottom):
+				if (gigantula.y + gigantula.offsetY) >= 200 and (gigantula.y + gigantula.offsetY) < (game.map_size_y - 200 - game.screen_bottom):
 					if game.pixel_table[gigantula.x + gigantula.offsetX][gigantula.y + gigantula.offsetY] == 0:
 						# print "y"
 						gigantula.y += gigantula.offsetY
@@ -4441,8 +4441,8 @@ while True:
 				for spider in monster.monsters:
 					spider.energy = 100
 					# spider.speed = game.spiders_speed
-					spider.x = random.randint(100, game.map_size_x - 100)
-					spider.y = random.randint(100, game.map_size_y - 100 - game.screen_bottom)
+					spider.x = random.randint(200, game.map_size_x - 200)
+					spider.y = random.randint(200, game.map_size_y - 200 - game.screen_bottom)
 					spider.frozen = False
 					spider.killed = False
 					spider.fried = False
@@ -4454,8 +4454,8 @@ while True:
 					
 				for gigantula in monster.gigantulas:
 					gigantula.energy = 100
-					gigantula.x = random.randint(100, game.map_size_x - 100)
-					gigantula.y = random.randint(100, game.map_size_y - 100 - game.screen_bottom)
+					gigantula.x = random.randint(200, game.map_size_x - 200)
+					gigantula.y = random.randint(200, game.map_size_y - 200 - game.screen_bottom)
 					gigantula.frozen = False
 					gigantula.killed = False
 					gigantula.fried = False
@@ -4472,8 +4472,8 @@ while True:
 							
 				for robot in monster.robots:
 					robot.energy = 100
-					robot.x = random.randint(100, game.map_size_x - 100)
-					robot.y = random.randint(100, game.map_size_y - 100 - game.screen_bottom)
+					robot.x = random.randint(200, game.map_size_x - 200)
+					robot.y = random.randint(200, game.map_size_y - 200 - game.screen_bottom)
 					robot.frozen = False
 					robot.killed = False
 					robot.fried = False

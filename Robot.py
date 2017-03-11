@@ -12,7 +12,7 @@ class Robot:
 	energy = 100
 	armor = 250.0
 	speed = 2
-	base_decay = decay = 500 #time after robot corpse will disappear
+	base_decay = decay = 300 #time after robot corpse will disappear
 	model = None
 	dead_model = None
 	death_sound_played = False

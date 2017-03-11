@@ -142,7 +142,7 @@ class Game:
 	
 	laser_power = 10.0
 	laser_power_boost = 8.0 #power boost for each taken laser bonus
-	laser_upgraded_power_boost = 12.0
+	laser_additional_power_boost = 4.0 #additional boost to normal boost - increases for every player, everytime only one player buys it
 	
 	plasma_power = 100.0
 	
@@ -335,7 +335,7 @@ class Game:
 	new_bonus_max_time = 70 # maximum time after new bonus will appear
 	
 	# ammunition ammount
-	plasma_spheres = 10
+	plasma_spheres = 15
 	
 	green_money = 3000
 	gold_money = 12000

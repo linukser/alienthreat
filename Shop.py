@@ -221,7 +221,8 @@ class Shop:
 						if money >= flamethrower_upgrade_price and global_player.players[customer].has_flamethrower_upgrade1 == False:
 							global_player.players[customer].has_flamethrower_upgrade1 = True
 							global_player.players[customer].money -= flamethrower_upgrade_price
-							global_player.players[customer].flamethrower_range_upgrade = 3
+							#global_player.players[customer].flamethrower_range_upgrade = 3
+							global_player.players[customer].flamethrower_range_upgrade = 4
 					elif y == 1:
 						#upgrade plasma
 						if money >= plasma_upgrade_price and global_player.players[customer].has_plasma_upgrade1 == False:
@@ -239,7 +240,7 @@ class Shop:
 						if money >= laser_upgrade_price and global_player.players[customer].has_laser_upgrade1 == False:
 							global_player.players[customer].has_laser_upgrade1 = True
 							global_player.players[customer].money -= laser_upgrade_price
-							game.laser_power_boost = game.laser_upgraded_power_boost
+							game.laser_power_boost += game.laser_additional_power_boost
 							#global_player.players[customer].laser_diameter_upgrade = 4
 						
 					elif y == 4:

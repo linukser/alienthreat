@@ -484,6 +484,12 @@ while True:
 						screen.blit(floor, (y * 64 + game.x, x * 64 + game.y))
 			
 				draw_labirynth(screen, game, labirynth, wall4, game.labirynth_dim_x, game.labirynth_dim_y)
+			elif game.stage == 14:
+				for x in range(0, game.labirynth_dim_x * 6):
+					for y in range(0, game.labirynth_dim_y * 6):
+						screen.blit(floor, (y * 64 + game.x, x * 64 + game.y))
+			
+				draw_labirynth(screen, game, labirynth, wall5, game.labirynth_dim_x, game.labirynth_dim_y)
 				
 			if game.exit_opened == True:
 				screen.blit(exit_place, (128 + game.x + 320 * exit_place_x, 128 + game.y + 320 * exit_place_y))

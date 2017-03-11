@@ -88,11 +88,10 @@ class Player:
 		self.slot3 = 0
 		self.slot4 = 0
 		
-		#self.laser_ammo = 70
-		self.laser_ammo = 60
+		self.laser_ammo = 70
 		self.flamethrower_ammo = 25 # 25 litres of gasoline
 		self.freezer_ammo = 100
-		self.plasma_ammo = 20
+		self.plasma_ammo = 25
 		
 		# for testing
 		# self.laser_ammo = 5

@@ -9,7 +9,7 @@ class Boss4:
 	offsetY = 0
 	size = 400
 	energy = 100
-	armor = 300000.0
+	armor = 100000.0
 	# armor = 500.0
 	speed = 20
 

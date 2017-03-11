@@ -16,12 +16,13 @@ class Shop:
 		y = 0
 		shop_background = pygame.image.load('data/images/backgrounds/shop_background.png').convert()
 		
-		super_regeneration_price = 500000
-		body_armor_price = 200000
-		light_armor_price = 80000
-		vortex_enhancer_price = 50000
-		level2_force_field_price = 40000
-		force_field_price = 20000
+		super_regeneration_price = 100000
+		body_armor_price = 100000
+		light_armor_price = 50000
+		vortex_enhancer_price = 35000
+		add_life_price = 25000
+		#add_life_price = 400
+		force_field_price = 15000
 		
 		font = pygame.font.SysFont("Courier New", 30)
 		
@@ -61,12 +62,16 @@ class Shop:
 			elif global_player.players[customer].has_enhanced_vortex_upgrade == True:
 				vortex_enhancer_upgrade_label = font.render('vortex enhancer:      ' + str(vortex_enhancer_price), True, (0, 80, 0))
 			
-			if money >= level2_force_field_price and global_player.players[customer].has_level2_force_field_upgrade == False:
-				level2_force_field_upgrade_label   = font.render('level2 force field:   ' + str(level2_force_field_price), True, (0, 255, 100))
-			elif money < level2_force_field_price and global_player.players[customer].has_level2_force_field_upgrade == False:
-				level2_force_field_upgrade_label   = font.render('level2 force field:   ' + str(level2_force_field_price), True, (150, 0, 0))
-			elif global_player.players[customer].has_level2_force_field_upgrade == True:
-				level2_force_field_upgrade_label   = font.render('level2 force field:   ' + str(level2_force_field_price), True, (0, 80, 0))
+			if money >= add_life_price:
+				additional_life_label = font.render('additional life:      ' + str(add_life_price), True, (0, 255, 100))
+			elif money < add_life_price:
+				additional_life_label = font.render('additional life:     ' + str(add_life_price), True, (150, 0, 0))
+			#if money >= add_life_price and global_player.players[customer].has_level2_force_field_upgrade == False:
+			#	level2_force_field_upgrade_label   = font.render('additional life:   ' + str(add_life_price), True, (0, 255, 100))
+			#elif money < add_life_price and global_player.players[customer].has_level2_force_field_upgrade == False:
+			#	level2_force_field_upgrade_label   = font.render('additional life:   ' + str(add_life_price), True, (150, 0, 0))
+			#elif global_player.players[customer].has_level2_force_field_upgrade == True:
+			#	level2_force_field_upgrade_label   = font.render('additional life:   ' + str(add_life_price), True, (0, 80, 0))
 			
 			if money >= force_field_price and global_player.players[customer].has_force_field == False:
 				force_field_label          = font.render('force field:          ' + str(force_field_price), True, (0, 255, 100))
@@ -81,7 +86,8 @@ class Shop:
 			screen.blit(body_armor_upgrade_label, (150, 300))
 			screen.blit(light_armor_upgrade_label, (150, 350))
 			screen.blit(vortex_enhancer_upgrade_label, (150, 400))
-			screen.blit(level2_force_field_upgrade_label, (150, 450))
+			#screen.blit(level2_force_field_upgrade_label, (150, 450))
+			screen.blit(additional_life_label, (150, 450))
 			screen.blit(force_field_label, (150, 500))
 			screen.blit(exit_shop_label, (150, 550))
 			
@@ -122,11 +128,10 @@ class Shop:
 							global_player.players[customer].vortex_loop_max = 10
 							global_player.players[customer].ammo['vortex'] = 1
 					elif y == 4:
-						#upgrade force field (much faster regeneration, double max force field)
-						if money >= level2_force_field_price and global_player.players[customer].has_level2_force_field_upgrade == False:
-							global_player.players[customer].has_level2_force_field_upgrade = True
-							global_player.players[customer].money -= level2_force_field_price
-							global_player.players[customer].max_force_field *= 3 #300
+						#buy additional life
+						if money >= add_life_price:
+							global_player.players[customer].money -= add_life_price
+							game.lifes_pool += 1
 					elif y == 5:
 						#faster player
 						if money >= force_field_price and global_player.players[customer].has_force_field == False:
@@ -147,6 +152,11 @@ class Shop:
 		exit = False
 		y = 0
 		shop_background = pygame.image.load('data/images/backgrounds/shop_background.png').convert()
+
+		flamethrower_upgrade_price = 10000
+		plasma_upgrade_price = 15000
+		freezer_upgrade_price = 20000
+		laser_upgrade_price = 30000
 		
 		font = pygame.font.SysFont("Courier New", 60)
 		
@@ -158,33 +168,33 @@ class Shop:
 			
 			money_label = font.render('money: ' + str(money), True, (0, 255, 100))
 			
-			if money >= 25000 and global_player.players[customer].has_flamethrower_upgrade1 == False:
-				flamethrower_upgrade_label = font.render('combat flamethrower: 25000', True, (0, 255, 100))
-			elif money < 25000 and global_player.players[customer].has_flamethrower_upgrade1 == False:
-				flamethrower_upgrade_label = font.render('combat flamethrower: 25000', True, (150, 0, 0))
+			if money >= flamethrower_upgrade_price and global_player.players[customer].has_flamethrower_upgrade1 == False:
+				flamethrower_upgrade_label = font.render('combat flamethrower: ' + str(flamethrower_upgrade_price), True, (0, 255, 100))
+			elif money < flamethrower_upgrade_price and global_player.players[customer].has_flamethrower_upgrade1 == False:
+				flamethrower_upgrade_label = font.render('combat flamethrower: ' + str(flamethrower_upgrade_price), True, (150, 0, 0))
 			elif global_player.players[customer].has_flamethrower_upgrade1 == True:
-				flamethrower_upgrade_label = font.render('combat flamethrower: 25000', True, (0, 80, 0))
+				flamethrower_upgrade_label = font.render('combat flamethrower: ' + str(flamethrower_upgrade_price), True, (0, 80, 0))
 				
-			if money >= 35000 and global_player.players[customer].has_plasma_upgrade1 == False:
-				plasma_upgrade_label       = font.render('upgrade plasma:      35000', True, (0, 255, 100))
-			elif money < 35000 and global_player.players[customer].has_plasma_upgrade1 == False:
-				plasma_upgrade_label       = font.render('upgrade plasma:      35000', True, (150, 0, 0))
+			if money >= plasma_upgrade_price and global_player.players[customer].has_plasma_upgrade1 == False:
+				plasma_upgrade_label       = font.render('upgrade plasma:      ' + str(plasma_upgrade_price), True, (0, 255, 100))
+			elif money < plasma_upgrade_price and global_player.players[customer].has_plasma_upgrade1 == False:
+				plasma_upgrade_label       = font.render('upgrade plasma:      ' + str(plasma_upgrade_price), True, (150, 0, 0))
 			elif global_player.players[customer].has_plasma_upgrade1 == True:
-				plasma_upgrade_label       = font.render('upgrade plasma:      35000', True, (0, 80, 0))
+				plasma_upgrade_label       = font.render('upgrade plasma:      ' + str(plasma_upgrade_price), True, (0, 80, 0))
 			
-			if money >= 50000 and global_player.players[customer].has_freezer_upgrade1 == False:
-				freezer_upgrade_label      = font.render('upgrade freezer:     50000', True, (0, 255, 100))
-			elif money < 50000 and global_player.players[customer].has_freezer_upgrade1 == False:
-				freezer_upgrade_label      = font.render('upgrade freezer:     50000', True, (150, 0, 0))
+			if money >= freezer_upgrade_price and global_player.players[customer].has_freezer_upgrade1 == False:
+				freezer_upgrade_label      = font.render('upgrade freezer:     ' + str(freezer_upgrade_price), True, (0, 255, 100))
+			elif money < freezer_upgrade_price and global_player.players[customer].has_freezer_upgrade1 == False:
+				freezer_upgrade_label      = font.render('upgrade freezer:     ' + str(freezer_upgrade_price), True, (150, 0, 0))
 			elif global_player.players[customer].has_freezer_upgrade1 == True:
-				freezer_upgrade_label      = font.render('upgrade freezer:     50000', True, (0, 80, 0))
+				freezer_upgrade_label      = font.render('upgrade freezer:     ' + str(freezer_upgrade_price), True, (0, 80, 0))
 				
-			if money >= 150000 and global_player.players[customer].has_laser_upgrade1 == False:
-				laser_upgrade_label        = font.render('petawat laser:      150000', True, (0, 255, 100))
-			elif money < 150000 and global_player.players[customer].has_laser_upgrade1 == False:
-				laser_upgrade_label        = font.render('petawat laser:      150000', True, (150, 0, 0))
+			if money >= laser_upgrade_price and global_player.players[customer].has_laser_upgrade1 == False:
+				laser_upgrade_label        = font.render('laser power boost:   ' + str(laser_upgrade_price), True, (0, 255, 100))
+			elif money < laser_upgrade_price and global_player.players[customer].has_laser_upgrade1 == False:
+				laser_upgrade_label        = font.render('laser power boost:   ' + str(laser_upgrade_price), True, (150, 0, 0))
 			elif global_player.players[customer].has_laser_upgrade1 == True:
-				laser_upgrade_label        = font.render('petawat laser:      150000', True, (0, 80, 0))
+				laser_upgrade_label        = font.render('laser power boost:   ' + str(laser_upgrade_price), True, (0, 80, 0))
 			
 			exit_shop_label = font.render('return', True, (0, 255, 100))
 			screen.blit(money_label, (150, 150))
@@ -208,28 +218,29 @@ class Shop:
 				elif event.type == KEYDOWN and event.key == K_RETURN:
 					if y == 0:
 						#upgrade flamethrower
-						if money >= 25000 and global_player.players[customer].has_flamethrower_upgrade1 == False:
+						if money >= flamethrower_upgrade_price and global_player.players[customer].has_flamethrower_upgrade1 == False:
 							global_player.players[customer].has_flamethrower_upgrade1 = True
-							global_player.players[customer].money -= 25000
+							global_player.players[customer].money -= flamethrower_upgrade_price
 							global_player.players[customer].flamethrower_range_upgrade = 3
 					elif y == 1:
 						#upgrade plasma
-						if money >= 35000 and global_player.players[customer].has_plasma_upgrade1 == False:
+						if money >= plasma_upgrade_price and global_player.players[customer].has_plasma_upgrade1 == False:
 							global_player.players[customer].has_plasma_upgrade1 = True
-							global_player.players[customer].money -= 35000
+							global_player.players[customer].money -= plasma_upgrade_price
 							global_player.players[customer].plasma_range_upgrade = 3
 					elif y == 2:
 						#upgrade freezer
-						if money >= 50000 and global_player.players[customer].has_freezer_upgrade1 == False:
+						if money >= freezer_upgrade_price and global_player.players[customer].has_freezer_upgrade1 == False:
 							global_player.players[customer].has_freezer_upgrade1 = True
-							global_player.players[customer].money -= 50000
+							global_player.players[customer].money -= freezer_upgrade_price
 							global_player.players[customer].freezer_range_upgrade = 1
 					elif y == 3:
 						#upgrade laser
-						if money >= 150000 and global_player.players[customer].has_laser_upgrade1 == False:
+						if money >= laser_upgrade_price and global_player.players[customer].has_laser_upgrade1 == False:
 							global_player.players[customer].has_laser_upgrade1 = True
-							global_player.players[customer].money -= 150000
-							global_player.players[customer].laser_diameter_upgrade = 4
+							global_player.players[customer].money -= laser_upgrade_price
+							game.laser_power_boost = game.laser_upgraded_power_boost
+							#global_player.players[customer].laser_diameter_upgrade = 4
 						
 					elif y == 4:
 						exit_shop = True
@@ -253,11 +264,7 @@ class Shop:
 			screen.fill((0, 0, 0))
 			screen.blit(shop_background, (0, 0))			
 		
-			energy_xp_price = 10
-			speed_xp_price = 10
-		
 			title_label = font.render('slots', True, (0, 255, 100))
-			
 			
 			slot1_label = font.render('slot1', True, (0, 255, 100))
 			
@@ -321,16 +328,16 @@ class Shop:
 			screen.fill((0, 0, 0))
 			screen.blit(shop_background, (0, 0))			
 		
-			armor_xp_price = 300
-			speed_xp_price = 100
+			medkit_xp_price = 50
+			speed_xp_price = 50
 			
-			additional_armor = 2
+			additional_energy = 1
 			additional_speed = 1
 		
 			title_label = font.render('experience: ' + str(global_player.players[customer].experience), True, (0, 255, 100))
 			
-			life_label = font.render('+' + str(additional_armor) + ' to armor [' + str(armor_xp_price) + ' xp]', True, (0, 255, 100))
-			speed_label = font.render('+' + str(additional_speed) + ' to speed [' + str(speed_xp_price) + ' xp]', True, (0, 255, 100))			
+			life_label = font.render('+' + str(additional_energy) + ' to medkit [' + str(medkit_xp_price) + ' xp]', True, (0, 255, 100))
+			speed_label = font.render('+' + str(additional_speed) + ' to speed  [' + str(speed_xp_price) + ' xp]', True, (0, 255, 100))			
 			exit_shop_label = font.render('return', True, (0, 255, 100))
 
 			screen.blit(title_label, (150, 150))
@@ -352,10 +359,9 @@ class Shop:
 				elif event.type == KEYDOWN and event.key == K_RETURN:
 					if y == 0:
 						#add +1 to armor
-						if global_player.players[customer].experience >= armor_xp_price:
-							global_player.players[customer].experience -= armor_xp_price
-							global_player.players[customer].armor += additional_armor
-							global_player.players[customer].base_armor += additional_armor
+						if global_player.players[customer].experience >= medkit_xp_price:
+							global_player.players[customer].experience -= medkit_xp_price
+							global_player.players[customer].add_energy_booster += additional_energy
 					elif y == 1:
 						#add +1 to speed
 						if global_player.players[customer].experience >= speed_xp_price:

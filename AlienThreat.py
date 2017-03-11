@@ -286,6 +286,7 @@ background_earth = pygame.image.load('data/images/backgrounds/earth.jpg').conver
 background_moon = pygame.image.load('data/images/backgrounds/moon.png').convert()
 background_mars = pygame.image.load('data/images/backgrounds/mars.png').convert()
 background_venus = pygame.image.load('data/images/backgrounds/venus.png').convert()
+background_neptune = pygame.image.load('data/images/backgrounds/neptune.png').convert()
 
 surface = background_earth
 
@@ -310,6 +311,7 @@ wall1 = pygame.image.load('data/images/walls/nasa_hq_wall.png').convert()
 wall2 = pygame.image.load('data/images/walls/moon_base_wall.png').convert()
 wall3 = pygame.image.load('data/images/walls/mars_colony_wall.png').convert()
 wall4 = pygame.image.load('data/images/walls/alpha_labs_wall.png').convert()
+wall5 = pygame.image.load('data/images/walls/neptune_corridors_wall.png').convert()
 
 mass1 = Mass(random.randint(200, game.map_size_x - 200), random.randint(200, game.map_size_y - 200 - game.screen_bottom))
 mass2 = Mass(random.randint(200, game.map_size_x - 200), random.randint(200, game.map_size_y - 200 - game.screen_bottom))
@@ -1823,11 +1825,11 @@ while True:
 						#medkit
 						if bonus.which_one == 0:
 							if nash.alive():
-								nash.add_energy(25)
+								nash.add_energy(game.medkit_ammount + nash.add_energy_booster)
 							if george.alive():
-								george.add_energy(25)
+								george.add_energy(game.medkit_ammount + george.add_energy_booster)
 							if james.alive():
-								james.add_energy(25)
+								james.add_energy(game.medkit_ammount + james.add_energy_booster)
 				
 							nash.money += 10
 							game.points += 10
@@ -2395,11 +2397,11 @@ while True:
 						#medkit
 						if bonus.which_one == 0:
 							if nash.alive():
-								nash.add_energy(game.medkit_ammount)
+								nash.add_energy(game.medkit_ammount + nash.add_energy_booster)
 							if george.alive():
-								george.add_energy(game.medkit_ammount)
+								george.add_energy(game.medkit_ammount + george.add_energy_booster)
 							if james.alive():
-								james.add_energy(game.medkit_ammount)
+								james.add_energy(game.medkit_ammount + james.add_energy_booster)
 							
 							nash.money += 10
 							game.points += 10
@@ -2716,11 +2718,11 @@ while True:
 						#medkit
 						if bonus.which_one == 0:
 							if nash.alive():
-								nash.add_energy(game.medkit_ammount)
+								nash.add_energy(game.medkit_ammount + nash.add_energy_booster)
 							if george.alive():
-								george.add_energy(game.medkit_ammount)
+								george.add_energy(game.medkit_ammount + george.add_energy_booster)
 							if james.alive():
-								james.add_energy(game.medkit_ammount)
+								james.add_energy(game.medkit_ammount + james.add_energy_booster)
 							
 							nash.money += 10
 							game.points += 10
@@ -3214,6 +3216,18 @@ while True:
 				
 				boss_energy_label = font.render('boss: ' + str(int(game.boss.energy)), True, (0, 255, 255), (0, 0, 0))
 				screen.blit(boss_energy_label, (850, 0))
+
+			#world 5
+			elif game.level < game.stage13_frontier:
+				surface = background_neptune
+				level_name_text = font.render('NEPTUNES FRONTIER', True, (255, 0, 0), (0, 0, 0))
+			elif game.level < game.stage14_frontier:
+				level_name_text = font.render('NEPTUNES MYSTERIOUS CORRIDORS', True, (135, 135, 120), (0, 0, 0))
+			elif game.level < game.stage15_frontier:
+				level_name_text = font.render('HERE COMES THE LAST SOLAR SYSTEM BOSS', True, (0, 255, 255), (0, 0, 0))
+				
+				boss_energy_label = font.render('boss: ' + str(int(game.boss.energy)), True, (0, 255, 255), (0, 0, 0))
+				screen.blit(boss_energy_label, (850, 0))
 				
 			else:
 				time.sleep(1.0)
@@ -3340,14 +3354,18 @@ while True:
 					nash.regenerate_energy('easy')
 					nash_regeneration_loop = 0
 							
-			if nash.has_level2_force_field_upgrade == False:
-				if nash_ff_regeneration_loop == 40:
-					nash.regenerate_force_field()
-					nash_ff_regeneration_loop = 0
-			elif nash.has_level2_force_field_upgrade == True:
-				if nash_ff_regeneration_loop >= 20:
-					nash.regenerate_force_field()
-					nash_ff_regeneration_loop = 0
+			if nash_ff_regeneration_loop == 40:
+				nash.regenerate_force_field()
+				nash_ff_regeneration_loop = 0
+
+			#if nash.has_level2_force_field_upgrade == False:
+			#	if nash_ff_regeneration_loop == 40:
+			#		nash.regenerate_force_field()
+			#		nash_ff_regeneration_loop = 0
+			#elif nash.has_level2_force_field_upgrade == True:
+			#	if nash_ff_regeneration_loop >= 20:
+			#		nash.regenerate_force_field()
+			#		nash_ff_regeneration_loop = 0
 
 			nash_regeneration_loop += 1
 			nash_ff_regeneration_loop += 1
@@ -3366,15 +3384,19 @@ while True:
 				if george_regeneration_loop >= 20:
 					george.regenerate_energy('easy')
 					george_regeneration_loop = 0
-				
-			if george.has_level2_force_field_upgrade == False:
-				if george_ff_regeneration_loop == 40:
-					george.regenerate_force_field()
-					george_ff_regeneration_loop = 0
-			elif george.has_level2_force_field_upgrade == True:
-				if george_ff_regeneration_loop >= 20:
-					george.regenerate_force_field()
-					george_ff_regeneration_loop = 0
+
+			if george_ff_regeneration_loop == 40:
+				george.regenerate_force_field()
+				george_ff_regeneration_loop = 0
+
+			#if george.has_level2_force_field_upgrade == False:
+			#	if george_ff_regeneration_loop == 40:
+			#		george.regenerate_force_field()
+			#		george_ff_regeneration_loop = 0
+			#elif george.has_level2_force_field_upgrade == True:
+			#	if george_ff_regeneration_loop >= 20:
+			#		george.regenerate_force_field()
+			#		george_ff_regeneration_loop = 0
 				
 			george_regeneration_loop += 1
 			george_ff_regeneration_loop += 1
@@ -3393,15 +3415,19 @@ while True:
 				if james_regeneration_loop >= 20:
 					james.regenerate_energy('easy')
 					james_regeneration_loop = 0
-				
-			if james.has_level2_force_field_upgrade == False:
-				if james_ff_regeneration_loop == 40:
-					james.regenerate_force_field()
-					james_ff_regeneration_loop = 0
-			elif james.has_level2_force_field_upgrade == True:
-				if james_ff_regeneration_loop >= 20:
-					james.regenerate_force_field()
-					james_ff_regeneration_loop = 0
+
+			if james_ff_regeneration_loop == 40:
+				james.regenerate_force_field()
+				james_ff_regeneration_loop = 0
+
+			#if james.has_level2_force_field_upgrade == False:
+			#	if james_ff_regeneration_loop == 40:
+			#		james.regenerate_force_field()
+			#		james_ff_regeneration_loop = 0
+			#elif james.has_level2_force_field_upgrade == True:
+			#	if james_ff_regeneration_loop >= 20:
+			#		james.regenerate_force_field()
+			#		james_ff_regeneration_loop = 0
 				
 			james_regeneration_loop += 1
 			james_ff_regeneration_loop += 1
@@ -3695,6 +3721,10 @@ while True:
 				game.y = 0
 
 				clear_object_table(game)
+
+				pygame.mixer.music.stop()
+				pygame.mixer.music.load('data/music/world2.ogg')
+				pygame.mixer.music.play()
 							
 				#story
 				time.sleep(2.0)
@@ -3906,6 +3936,10 @@ while True:
 				game.y = 0
 
 				clear_object_table(game)
+
+				pygame.mixer.music.stop()
+				pygame.mixer.music.load('data/music/world3.ogg')
+				pygame.mixer.music.play()
 								
 				#story
 				time.sleep(2.0)
@@ -4114,6 +4148,10 @@ while True:
 				game.y = 0
 
 				clear_object_table(game)
+
+				pygame.mixer.music.stop()
+				pygame.mixer.music.load('data/music/world4.ogg')
+				pygame.mixer.music.play()
 				
 				#story
 				time.sleep(2.0)
@@ -4258,6 +4296,215 @@ while True:
 				text_label = story_font.render(game.stage12_story_text3, True, (0, 255, 100))
 				screen.blit(text_label, (200, 400))
 				text_label = story_font.render(game.stage12_story_text4, True, (0, 255, 100))
+				screen.blit(text_label, (200, 450))
+				pygame.display.flip()
+				
+				skip = False
+				while(skip == False):
+					for event in pygame.event.get():
+						if event.type == KEYDOWN:
+							skip = True
+							
+				screen.fill((0, 0, 0))
+							
+				loading_label = loading_font.render('Loading...', True, (0, 255, 100))
+				screen.blit(loading_label, (400, 300))
+				pygame.display.flip()
+
+			elif game.level == game.stage12_frontier:
+				game.stage = 13
+				
+				game.level_type = "arena"
+				
+				game.number_of_spiders = 20
+				game.number_of_new_spiders = 2
+				
+				game.number_of_gigantulas = 10
+				game.number_of_new_gigantulas = 1
+				
+				game.number_of_robots = 20
+				game.number_of_new_robots = 2
+				
+				game.number_of_cranes = 10
+				game.number_of_new_cranes = 1
+				
+				game.number_of_hunters = 7
+				game.number_of_new_hunters = 2
+				
+				for i in range(0, game.number_of_spiders):
+					monster.add_spider(game)
+						
+				for i in range(0, game.number_of_gigantulas):
+					monster.add_gigantula(game)
+					
+				for i in range(0, game.number_of_robots):
+					monster.add_robot(game)
+					
+				for i in range(0, game.number_of_cranes):
+					monster.add_crane(game)
+					
+				for i in range(0, game.number_of_hunters):
+					monster.add_hunter(game)
+				
+				game.map_size_x = resolution[0]
+				game.map_size_y = resolution[1]
+				
+				nash.x = 100
+				nash.y = 100
+				
+				rxvt.x = 200
+				rxvt.y = 200
+				
+				if game.number_of_players > 1:
+					george.x = 200
+					george.y = 100
+					
+				if game.number_of_players > 2:
+					james.x = 100
+					james.y = 200
+				
+				game.x = 0
+				game.y = 0
+
+				clear_object_table(game)
+
+				pygame.mixer.music.stop()
+				pygame.mixer.music.load('data/music/world5.ogg')
+				pygame.mixer.music.play()
+				
+				#story
+				time.sleep(2.0)
+				screen.fill((0, 0, 0))
+				text_label = story_font.render(game.stage13_story_text1, True, (0, 255, 100))
+				screen.blit(text_label, (200, 300))
+				text_label = story_font.render(game.stage13_story_text2, True, (0, 255, 100))
+				screen.blit(text_label, (200, 350))
+				text_label = story_font.render(game.stage13_story_text3, True, (0, 255, 100))
+				screen.blit(text_label, (200, 400))
+				text_label = story_font.render(game.stage13_story_text4, True, (0, 255, 100))
+				screen.blit(text_label, (200, 450))
+				pygame.display.flip()
+				
+				skip = False
+				while(skip == False):
+					for event in pygame.event.get():
+						if event.type == KEYDOWN:
+							skip = True
+							
+				screen.fill((0, 0, 0))
+							
+				loading_label = loading_font.render('Loading...', True, (0, 255, 100))
+				screen.blit(loading_label, (400, 300))
+				pygame.display.flip()
+				
+			elif game.level == game.stage13_frontier:
+				game.stage = 14
+				
+				game.level_type = "labirynth"
+				
+				game.labirynth_dim_x += 1
+				game.labirynth_dim_y += 1
+
+				game.map_size_x = game.labirynth_dim_x * 320 + 64
+				game.map_size_y = game.labirynth_dim_y * 320 + 64
+				
+				shop = Shop()
+				shop.enter_shop(screen, game, global_player)
+				pygame.mixer.music.stop()
+				pygame.mixer.music.load('data/music/world4.ogg')
+				pygame.mixer.music.play()
+								
+				#story
+				time.sleep(2.0)
+				screen.fill((0, 0, 0))
+				text_label = story_font.render(game.stage14_story_text1, True, (0, 255, 100))
+				screen.blit(text_label, (200, 150))
+				text_label = story_font.render(game.stage14_story_text2, True, (0, 255, 100))
+				screen.blit(text_label, (200, 200))
+				text_label = story_font.render(game.stage14_story_text3, True, (0, 255, 100))
+				screen.blit(text_label, (200, 250))
+				text_label = story_font.render(game.stage14_story_text4, True, (0, 255, 100))
+				screen.blit(text_label, (200, 300))
+				pygame.display.flip()
+				
+				skip = False
+				while(skip == False):
+					for event in pygame.event.get():
+						if event.type == KEYDOWN:
+							skip = True
+							
+				screen.fill((0, 0, 0))
+							
+				loading_label = loading_font.render('Loading...', True, (0, 255, 100))
+				screen.blit(loading_label, (400, 300))
+				pygame.display.flip()
+			elif game.level == game.stage14_frontier: #boss level
+				game.stage = 15
+				
+				game.level_type = "boss_level"
+				
+				del monster.monsters[:]
+				del monster.gigantulas[:]
+				del monster.robots[:]
+				del monster.cranes[:]
+				del monster.hunters[:]
+				
+				game.number_of_spiders = 0
+				game.number_of_new_spiders = 0
+				
+				game.number_of_gigantulas = 0
+				game.number_of_new_gigantulas = 0
+				
+				game.number_of_robots = 0
+				game.number_of_new_robots = 0
+				
+				game.number_of_cranes = 0
+				game.number_of_new_cranes = 0
+				
+				game.number_of_hunters = 0
+				game.number_of_new_hunters = 0
+				
+				game.boss = Boss4(resolution[0] / 2, 300)
+				game.boss.energy = 100
+				
+				game.map_size_x = resolution[0]
+				game.map_size_y = resolution[1]
+				
+				nash.x = 100
+				nash.y = 100
+				
+				rxvt.x = 200
+				rxvt.y = 200
+				
+				if game.number_of_players > 1:
+					george.x = 200
+					george.y = 100
+					
+				if game.number_of_players > 2:
+					james.x = 100
+					james.y = 200
+				
+				game.x = 0
+				game.y = 0
+
+				clear_object_table(game)
+				
+				shop = Shop()
+				shop.enter_shop(screen, game, global_player)
+				pygame.mixer.music.stop()
+				pygame.mixer.music.load('data/music/world4.ogg')
+				pygame.mixer.music.play()
+				
+				#story
+				time.sleep(2.0)
+				screen.fill((0, 0, 0))
+				text_label = story_font.render(game.stage15_story_text1, True, (0, 255, 100))
+				screen.blit(text_label, (200, 300))
+				text_label = story_font.render(game.stage15_story_text2, True, (0, 255, 100))
+				screen.blit(text_label, (200, 350))
+				text_label = story_font.render(game.stage15_story_text3, True, (0, 255, 100))
+				screen.blit(text_label, (200, 400))
+				text_label = story_font.render(game.stage15_story_text4, True, (0, 255, 100))
 				screen.blit(text_label, (200, 450))
 				pygame.display.flip()
 				

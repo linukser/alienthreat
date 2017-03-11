@@ -22,10 +22,11 @@ class Player:
 		self.offsetY = 0
 		
 		#upgrades
+		self.add_energy_booster = 0
+
 		self.has_super_regeneration_upgrade = False
 		self.has_body_armor_upgrade = False
 		self.has_enhanced_vortex_upgrade = False
-		self.has_level2_force_field_upgrade = False
 		self.has_light_armor_upgrade = False
 		self.has_force_field = False
 		
@@ -87,8 +88,9 @@ class Player:
 		self.slot3 = 0
 		self.slot4 = 0
 		
-		self.laser_ammo = 70
-		self.flamethrower_ammo = 35 # 25 litres of gasoline
+		#self.laser_ammo = 70
+		self.laser_ammo = 60
+		self.flamethrower_ammo = 25 # 25 litres of gasoline
 		self.freezer_ammo = 100
 		self.plasma_ammo = 20
 		
@@ -116,6 +118,7 @@ class Player:
 		
 		self.vortex_loop = 0
 		self.vortex_loop_max = 25 # if this number is lower then vortex regenerates faster
+		#self.vortex_loop_max = 0.1 # if this number is lower then vortex regenerates faster
 		
 		#weapons
 		self.fire = False

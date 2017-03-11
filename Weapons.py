@@ -322,29 +322,56 @@ def laser(threadName, delay, screen, laser_sound, x, y, angle, ammo, monster, ga
 #================================ VORTEX ==========================================================================
 		
 def vortex(threadName, delay, screen, x, y, angle, ammo, monster, game, global_player, player_name):
-	for i in range(0, 20):
-	
-		for angl in range(0, 100):
-			#draw vortex
-			random_distortion = random.uniform(-0.2, 0.2)
-			new_x = x + int(math.sin(angl * 3 + random_distortion) * 30 * i)
-			new_y = y + int(math.cos(angl * 3 + random_distortion) * 30 * i)
-			
-			random_size = random.randint(10, 21)
-			pygame.draw.circle(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), (new_x, new_y), random_size, 0)
+	if global_player.players[player_name].has_enhanced_vortex_upgrade == False:
+		for i in range(0, 20):
+		
+			for angl in range(0, 100):
+				#draw vortex
+				random_distortion = random.uniform(-0.2, 0.2)
+				new_x = x + int(math.sin(angl * 3 + random_distortion) * 30 * i)
+				new_y = y + int(math.cos(angl * 3 + random_distortion) * 30 * i)
 				
-			monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, player_name)
-			
-			random_distortion = random.uniform(-0.2, 0.2)
-			new_x = x + int(math.sin(angl * 3 + random_distortion) * 30 * i)
-			new_y = y + int(math.cos(angl * 3 + random_distortion) * 30 * i)
-			
-			random_size = random.randint(15, 26)
-			pygame.draw.circle(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), (new_x, new_y), random_size, 0)
+				random_size = random.randint(10, 21)
+				pygame.draw.circle(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), (new_x, new_y), random_size, 0)
 					
-			monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, player_name)
-			
-		time.sleep(0.01)
+				monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, player_name)
+				
+				random_distortion = random.uniform(-0.2, 0.2)
+				new_x = x + int(math.sin(angl * 3 + random_distortion) * 30 * i)
+				new_y = y + int(math.cos(angl * 3 + random_distortion) * 30 * i)
+				
+				random_size = random.randint(15, 26)
+				pygame.draw.circle(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), (new_x, new_y), random_size, 0)
+						
+				monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, player_name)
+				
+			time.sleep(0.01)
+
+	else:
+		for i in range(0, 50):
+		
+			for angl in range(0, 100):
+				#draw vortex
+				random_distortion = random.uniform(-0.2, 0.2)
+				new_x = x + int(math.sin(angl * 3 + random_distortion) * 30 * i)
+				new_y = y + int(math.cos(angl * 3 + random_distortion) * 30 * i)
+				
+				random_size = random.randint(10, 21)
+				pygame.draw.circle(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), (new_x, new_y), random_size, 0)
+					
+				monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, player_name)
+				
+				random_distortion = random.uniform(-0.2, 0.2)
+				new_x = x + int(math.sin(angl * 3 + random_distortion) * 30 * i)
+				new_y = y + int(math.cos(angl * 3 + random_distortion) * 30 * i)
+				
+				random_size = random.randint(15, 26)
+				pygame.draw.circle(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), (new_x, new_y), random_size, 0)
+						
+				monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, player_name)
+				
+			time.sleep(0.01)
+		
 
 #================================ ROBOT WEAPON ==========================================================================		
 		

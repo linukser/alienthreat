@@ -13,7 +13,7 @@ class Hunter:
 	armor = 700.0
 	speed = 7
 	fire_loop = 0
-	base_decay = decay = 1000
+	base_decay = decay = 500
 	model = None
 	dead_model = None
 	death_sound_played = False

@@ -12,7 +12,7 @@ class Gigantula:
 	energy = 100
 	armor = 200
 	speed = 5
-	base_decay = decay = 1000 #time after gigantula corpse will disappear
+	base_decay = decay = 500 #time after gigantula corpse will disappear
 	model = None
 	dead_model = None
 	death_sound_played = False

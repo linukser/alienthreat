@@ -2,7 +2,7 @@ from Bonus import *
 from Key import *
 
 class Game:
-	version = "0.70"
+	version = "0.71"
 
 	# map x, y
 	x = 0
@@ -58,8 +58,9 @@ class Game:
 	wait_with_explosion_loop_max = 20
 	
 	points = 0
-	lifes_pool = 5
-	player_death_time = 0.06
+	lifes_pool = 7
+	#player_death_time = 0.06
+	player_death_time = 0.03
 	
 	#technical stuff
 	started = False
@@ -141,6 +142,7 @@ class Game:
 	
 	laser_power = 10.0
 	laser_power_boost = 8.0 #power boost for each taken laser bonus
+	laser_upgraded_power_boost = 12.0
 	
 	plasma_power = 100.0
 	
@@ -232,6 +234,9 @@ class Game:
 	stage11_frontier = stage10_frontier + number_of_levels_in_labirynth_stage #28
 	stage12_frontier = stage11_frontier + 1 #29
 	
+	stage13_frontier = stage12_frontier + number_of_levels_in_arena_stage #25
+	stage14_frontier = stage13_frontier + number_of_levels_in_labirynth_stage #28
+	stage15_frontier = stage14_frontier + 1 #29
 	
 	#world 1
 	stage1_story_text1 = 'It is year 2211... planet Earth'
@@ -302,6 +307,22 @@ class Game:
 	stage12_story_text3 = ''
 	stage12_story_text4 = ''
 
+	#world 5 - NEPTUNE
+	stage13_story_text1 = 'After defeating the Mass Lord you gained access to incredible alien technology.'
+	stage13_story_text2 = 'You modify your Big City Destroyer, and now it becomes the first ever Galactic Cruiser!'
+	stage13_story_text3 = 'You want to search all the stars in the galaxy and find out more about the aliens.'
+	stage13_story_text4 = 'However something tells you that you have to make one last stop in the Solar System - the Neptune!'
+	
+	stage14_story_text1 = 'You find mysterious corridors on Neptune.'
+	stage14_story_text2 = 'And of course... they\'re full of aliens!'
+	stage14_story_text3 = ''
+	stage14_story_text4 = ''
+	
+	stage15_story_text1 = 'Boss time!'
+	stage15_story_text2 = ''
+	stage15_story_text3 = ''
+	stage15_story_text4 = ''
+
 	
 	#bonuses
 	bonuses = []
@@ -314,7 +335,7 @@ class Game:
 	new_bonus_max_time = 70 # maximum time after new bonus will appear
 	
 	# ammunition ammount
-	plasma_spheres = 20
+	plasma_spheres = 10
 	
 	green_money = 3000
 	gold_money = 12000

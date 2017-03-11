@@ -11,7 +11,7 @@ class Spider:
 	energy = 100
 	armor = 15
 	speed = 7
-	base_decay = decay = 300 #time after spider corpse will disappear
+	base_decay = decay = 500 #time after spider corpse will disappear
 	model = None
 	dead_model = None
 	death_sound_played = False

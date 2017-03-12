@@ -55,11 +55,11 @@ class Game:
 	# labirynth_dim_y = 3 # for testing
 
 	wait_with_explosion_loop = 0
-	wait_with_explosion_loop_max = 20
+	wait_with_explosion_loop_max = 15
+	#wait_with_explosion_loop_max = 20
 	
 	points = 0
 	lifes_pool = 7
-	#player_death_time = 0.06
 	player_death_time = 0.03
 	
 	#technical stuff
@@ -147,7 +147,7 @@ class Game:
 	plasma_power = 100.0
 	
 	#freezer_power = 180.0
-	freezer_power = 60.0
+	freezer_power = 100.0
 	freezer_power_for_spider = freezer_power
 	freezer_power_for_gigantula = freezer_power
 	freezer_power_for_robot = freezer_power
@@ -341,7 +341,7 @@ class Game:
 	green_money = 3000
 	gold_money = 12000
 	
-	medkit_ammount = 15
+	medkit_ammount = 10
 	
 	medkit_model = None
 	gasoline_model = None

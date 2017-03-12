@@ -16,7 +16,7 @@ class Shop:
 		y = 0
 		shop_background = pygame.image.load('data/images/backgrounds/shop_background.png').convert()
 		
-		super_regeneration_price = 100000
+		super_regeneration_price = 150000
 		body_armor_price = 100000
 		light_armor_price = 50000
 		vortex_enhancer_price = 35000
@@ -113,7 +113,7 @@ class Shop:
 						if money >= body_armor_price and global_player.players[customer].has_body_armor_upgrade == False:
 							global_player.players[customer].has_body_armor_upgrade = True
 							global_player.players[customer].money -= body_armor_price
-							global_player.players[customer].base_armor *= 4
+							global_player.players[customer].base_armor *= 3
 					elif y == 2:
 						#buy light armor
 						if money >= light_armor_price and global_player.players[customer].has_light_armor_upgrade == False:
@@ -332,7 +332,7 @@ class Shop:
 			medkit_xp_price = 50
 			speed_xp_price = 50
 			
-			additional_energy = 1
+			additional_energy = 2
 			additional_speed = 1
 		
 			title_label = font.render('experience: ' + str(global_player.players[customer].experience), True, (0, 255, 100))

@@ -1369,7 +1369,7 @@ while True:
 							random_size = random.randint(2, 7)
 							pygame.draw.circle(screen, (100, 0, 0), (new_x, new_y), random_size, 0)
 								
-							monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, 'nash')
+							#monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, 'nash')
 							
 							random_distortion = random.uniform(-0.2, 0.2)
 							new_x = nash.x + 32 + int(math.sin(angl * 3 + random_distortion) * 5 * i)
@@ -1468,7 +1468,7 @@ while True:
 							random_size = random.randint(2, 7)
 							pygame.draw.circle(screen, (100, 0, 0), (new_x, new_y), random_size, 0)
 								
-							monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, 'george')
+							#monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, 'george')
 							
 							random_distortion = random.uniform(-0.2, 0.2)
 							new_x = george.x + 32 + int(math.sin(angl * 3 + random_distortion) * 5 * i)
@@ -1564,7 +1564,7 @@ while True:
 							random_size = random.randint(2, 7)
 							pygame.draw.circle(screen, (100, 0, 0), (new_x, new_y), random_size, 0)
 								
-							monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, 'james')
+							#monster.kill_monster(game, new_x, new_y, 50, 'vortex', global_player, 'james')
 							
 							random_distortion = random.uniform(-0.2, 0.2)
 							new_x = james.x + 32 + int(math.sin(angl * 3 + random_distortion) * 5 * i)
@@ -4471,7 +4471,7 @@ while True:
 				game.number_of_hunters = 0
 				game.number_of_new_hunters = 0
 				
-				game.boss = Boss4(resolution[0] / 2, 300)
+				game.boss = Boss5(resolution[0] / 2, 300)
 				game.boss.energy = 100
 				
 				game.map_size_x = resolution[0]

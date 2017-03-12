@@ -22,6 +22,7 @@ from Boss1 import *
 from Boss2 import *
 from Boss3 import *
 from Boss4 import *
+from Boss5 import *
 
 if not pygame.font: print 'Warning, fonts disabled'
 if not pygame.mixer: print 'Warning, sound disabled'

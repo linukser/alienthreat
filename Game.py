@@ -135,18 +135,19 @@ class Game:
 	final_boss = None
 	
 	#weapons
-	vortex_power = 500.0
+	vortex_power = 700.0
 
 	flamethrower_power_for_crane = 40.0
 	flamethrower_power_for_robot = flamethrower_power_for_crane
 	
 	laser_power = 10.0
 	laser_power_boost = 8.0 #power boost for each taken laser bonus
-	laser_additional_power_boost = 4.0 #additional boost to normal boost - increases for every player, everytime only one player buys it
+	laser_additional_power_boost = 2.0 #additional boost to normal boost - increases for every player, everytime only one player buys it
 	
 	plasma_power = 100.0
 	
-	freezer_power = 180.0
+	#freezer_power = 180.0
+	freezer_power = 60.0
 	freezer_power_for_spider = freezer_power
 	freezer_power_for_gigantula = freezer_power
 	freezer_power_for_robot = freezer_power

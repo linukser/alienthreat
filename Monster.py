@@ -48,8 +48,8 @@ class Monster:
 							
 				elif weapon == 'freezer':
 					if new_x + range >= monster.x + 16 + game.x and new_x - range <= monster.x + 16 + monster.size + game.x and new_y + range >= monster.y + 16 + game.y and new_y - range <= monster.y + 16 + monster.size + game.y:
-						if global_player.players[player_name].has_freezer_upgrade1 == True:
-							game.freezer_power_for_spider = 150
+						#if global_player.players[player_name].has_freezer_upgrade1 == True:
+						#	game.freezer_power_for_spider = 150
 							
 						monster.energy -= game.freezer_power_for_spider / monster.armor
 						if monster.energy <= 0:
@@ -131,10 +131,13 @@ class Monster:
 							
 				elif weapon == 'freezer':
 					if new_x + range >= gigantula.x + 16 + game.x and new_x - range <= gigantula.x + 16 + gigantula.size + game.x and new_y + range >= gigantula.y + 16 + game.y and new_y - range <= gigantula.y + 16 + gigantula.size + game.y:
-						if global_player.players[player_name].has_freezer_upgrade1 == True:
-							game.freezer_power_for_gigantula = 150
+						#if global_player.players[player_name].has_freezer_upgrade1 == True:
+						#	gigantula.energy -= (game.freezer_power_for_gigantula + 30) / gigantula.armor
+						#else:
+						#	gigantula.energy -= game.freezer_power_for_gigantula / gigantula.armor
+
+						gigantula.energy -= game.freezer_power_for_gigantula / gigantula.armor
 												
-						gigantula.energy -= game.freezer_power_for_spider / gigantula.armor
 						if gigantula.energy <= 0:
 							gigantula.frozen = True
 							
@@ -213,8 +216,8 @@ class Monster:
 							
 				elif weapon == 'freezer':
 					if new_x + range >= robot.x + 16 + game.x and new_x - range <= robot.x + 16 + robot.size + game.x and new_y + range >= robot.y + 16 + game.y and new_y - range <= robot.y + 16 + robot.size + game.y:
-						if global_player.players[player_name].has_freezer_upgrade1 == True:
-							game.freezer_power_for_robot = 150
+						#if global_player.players[player_name].has_freezer_upgrade1 == True:
+						#	game.freezer_power_for_robot = 150
 												
 						robot.energy -= game.freezer_power_for_robot / robot.armor
 						if robot.energy <= 0:
@@ -295,8 +298,8 @@ class Monster:
 							
 				elif weapon == 'freezer':
 					if new_x + range >= crane.x + 16 + game.x and new_x - range <= crane.x + 16 + crane.size + game.x and new_y + range >= crane.y + 16 + game.y and new_y - range <= crane.y + 16 + crane.size + game.y:
-						if global_player.players[player_name].has_freezer_upgrade1 == True:
-							game.freezer_power_for_crane = 150
+						#if global_player.players[player_name].has_freezer_upgrade1 == True:
+						#	game.freezer_power_for_crane = 150
 												
 						crane.energy -= game.freezer_power_for_crane / crane.armor
 						if crane.energy <= 0:
@@ -377,8 +380,8 @@ class Monster:
 							
 				elif weapon == 'freezer':
 					if new_x + range >= hunter.x + 16 + game.x and new_x - range <= hunter.x + 16 + hunter.size + game.x and new_y + range >= hunter.y + 16 + game.y and new_y - range <= hunter.y + 16 + hunter.size + game.y:
-						if global_player.players[player_name].has_freezer_upgrade1 == True:
-							game.freezer_power_for_hunter = 150
+						#if global_player.players[player_name].has_freezer_upgrade1 == True:
+						#	game.freezer_power_for_hunter = 150
 												
 						hunter.energy -= game.freezer_power_for_spider / hunter.armor
 						if hunter.energy <= 0:
@@ -459,8 +462,8 @@ class Monster:
 						
 			elif weapon == 'freezer':
 				if new_x + range >= game.boss.x + 16 + game.x and new_x - range <= game.boss.x + 16 + game.boss.size + game.x and new_y + range >= game.boss.y + 16 + game.y and new_y - range <= game.boss.y + 16 + game.boss.size + game.y:
-					if global_player.players[player_name].has_freezer_upgrade1 == True:
-						game.freezer_power_for_boss = 150
+					#if global_player.players[player_name].has_freezer_upgrade1 == True:
+					#	game.freezer_power_for_boss = 150
 											
 					game.boss.energy -= game.freezer_power_for_boss / game.boss.armor
 

@@ -4417,7 +4417,7 @@ while True:
 				shop = Shop()
 				shop.enter_shop(screen, game, global_player)
 				pygame.mixer.music.stop()
-				pygame.mixer.music.load('data/music/world4.ogg')
+				pygame.mixer.music.load('data/music/world5.ogg')
 				pygame.mixer.music.play()
 								
 				#story
@@ -4498,7 +4498,7 @@ while True:
 				shop = Shop()
 				shop.enter_shop(screen, game, global_player)
 				pygame.mixer.music.stop()
-				pygame.mixer.music.load('data/music/world4.ogg')
+				pygame.mixer.music.load('data/music/world5.ogg')
 				pygame.mixer.music.play()
 				
 				#story

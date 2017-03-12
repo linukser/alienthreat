@@ -2,7 +2,7 @@ import pygame, math, sys, time, thread, os, random
 from pygame.locals import *
 from numpy import *
 
-class Boss4:
+class Boss5:
 	x = 0
 	y = 0
 	offsetX = 0

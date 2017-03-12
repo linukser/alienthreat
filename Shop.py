@@ -65,7 +65,7 @@ class Shop:
 			if money >= add_life_price:
 				additional_life_label = font.render('additional life:      ' + str(add_life_price), True, (0, 255, 100))
 			elif money < add_life_price:
-				additional_life_label = font.render('additional life:     ' + str(add_life_price), True, (150, 0, 0))
+				additional_life_label = font.render('additional life:      ' + str(add_life_price), True, (150, 0, 0))
 			#if money >= add_life_price and global_player.players[customer].has_level2_force_field_upgrade == False:
 			#	level2_force_field_upgrade_label   = font.render('additional life:   ' + str(add_life_price), True, (0, 255, 100))
 			#elif money < add_life_price and global_player.players[customer].has_level2_force_field_upgrade == False:

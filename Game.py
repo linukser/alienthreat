@@ -318,8 +318,8 @@ class Game:
 	stage14_story_text3 = ''
 	stage14_story_text4 = ''
 	
-	stage15_story_text1 = 'Boss time!'
-	stage15_story_text2 = ''
+	stage15_story_text1 = 'What\'s this?? A gigant gigantula?'
+	stage15_story_text2 = 'A Gigantulax!!'
 	stage15_story_text3 = ''
 	stage15_story_text4 = ''
 

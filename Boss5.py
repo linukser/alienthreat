@@ -7,7 +7,7 @@ class Boss4:
 	y = 0
 	offsetX = 0
 	offsetY = 0
-	size = 400
+	size = 350 
 	energy = 100
 	armor = 200000.0
 	# armor = 500.0
@@ -26,10 +26,10 @@ class Boss4:
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
-		self.model = pygame.image.load('data/images/bosses/boss4/mass_lord.png')
-		self.dead_model = pygame.image.load('data/images/bosses/boss4/mass_lord.png')
-		self.frozen_model = pygame.image.load('data/images/bosses/boss4/mass_lord.png')
-		self.fried_model = pygame.image.load('data/images/bosses/boss4/mass_lord.png')
+		self.model = pygame.image.load('data/images/bosses/boss5/gigantulax.png')
+		self.dead_model = pygame.image.load('data/images/bosses/boss5/gigantulax.png')
+		self.frozen_model = pygame.image.load('data/images/bosses/boss5/gigantulax.png')
+		self.fried_model = pygame.image.load('data/images/bosses/boss5/gigantulax.png')
 		self.frozen = False
 		self.killed = False
 		self.fried = False

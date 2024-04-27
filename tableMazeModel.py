@@ -152,5 +152,5 @@ class TableMazeModel:
 if __name__ == "__main__":
     model = TableMazeModel(rowsNum=8, colsNum=8)
     model.genMaze()
-    print str(model)
+    print(str(model))
 

@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 
@@ -329,11 +329,15 @@ class Shop:
 			screen.fill((0, 0, 0))
 			screen.blit(shop_background, (0, 0))			
 		
-			medkit_xp_price = 50
-			speed_xp_price = 50
+			#medkit_xp_price = 50
+			medkit_xp_price = 40
+			#speed_xp_price = 50
+			speed_xp_price = 40
 			
-			additional_energy = 2
-			additional_speed = 1
+			#additional_energy = 2
+			additional_energy = 4
+			#additional_speed = 1
+			additional_speed = 2
 		
 			title_label = font.render('experience: ' + str(global_player.players[customer].experience), True, (0, 255, 100))
 			

@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 

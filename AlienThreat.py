@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 from tableMazeModel import *
@@ -24,15 +24,17 @@ from Boss3 import *
 from Boss4 import *
 from Boss5 import *
 
-if not pygame.font: print 'Warning, fonts disabled'
-if not pygame.mixer: print 'Warning, sound disabled'
+if not pygame.font: print('Warning, fonts disabled')
+if not pygame.mixer: print('Warning, sound disabled')
 
 # resolution = (640, 480)		
 # resolution = (1024, 576)
 # resolution = (1152, 648)
 # resolution = (1280, 1024)
-# resolution = (1366, 768)
+
+#resolution = (1366, 768)
 resolution = (1920, 1080)
+
 #resolution = (2560, 1440)
 #resolution = (3440, 1440)
 #resolution = (3840, 2160)
@@ -159,9 +161,14 @@ pain_sound.set_volume(0.1)
 
 spider_death_sound = load_sound('monsters/spider_death.ogg')
 gigantula_death_sound = load_sound('monsters/gigantula_death.ogg')
-robot_death_sound = load_sound('monsters/robot_death.wav')
-crane_death_sound = load_sound('monsters/crane_death.wav')
-hunter_death_sound = load_sound('monsters/crane_death.wav')
+#robot_death_sound = load_sound('monsters/robot_death.wav')
+#crane_death_sound = load_sound('monsters/crane_death.wav')
+#hunter_death_sound = load_sound('monsters/crane_death.wav')
+
+robot_death_sound = load_sound('monsters/gigantula_death.ogg')
+crane_death_sound = load_sound('monsters/gigantula_death.ogg')
+hunter_death_sound = load_sound('monsters/gigantula_death.ogg')
+
 # spider_death_sound.set_volume(volume)
 spider_death_sound.set_volume(0.7)
 gigantula_death_sound.set_volume(1.5)
@@ -176,8 +183,8 @@ freezer_sound = load_sound('weapons/freezer.ogg')
 freezer_sound.set_volume(volume * 5)
 plasma_sound = load_sound('weapons/plasma.ogg')
 plasma_sound.set_volume(0.3)
-roar_sound = load_sound('roar.wav')
-roar_sound.set_volume(0.02)
+#roar_sound = load_sound('roar.wav')
+#roar_sound.set_volume(0.02)
 # applause_sound = load_sound('applause.wav')
 # applause_sound.set_volume(volume)
 vortex_sound = load_sound('weapons/vortex.ogg')
@@ -208,7 +215,7 @@ game.boss.energy = 0
 if game.level_type == "labirynth":
 	labirynth = TableMazeModel(rowsNum = game.labirynth_dim_x, colsNum = game.labirynth_dim_y)
 	labirynth.genMaze()
-	print str(labirynth)
+	print(str(labirynth))
 	# f = open('d:/prg/AlienThreat/logs/labirynth', 'w')
 	# # f = open('f:/prg/at/AlienThreat/logs/labirynth', 'w')
 	# # print f
@@ -685,58 +692,58 @@ while True:
 						if nash.force_field_enabled == False:
 							if nash.x - 20 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif nash.x + 20 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 								
 							if nash.y - 20 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif nash.y + 20 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 						else:
 							if nash.x - 50 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif nash.x + 50 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							
 							#throw spider away from force field
 							elif nash.x >= spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							elif nash.x < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 								
 							if nash.y - 50 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif nash.y + 50 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 									
 							#throw spider away from force field
 							elif nash.y >= spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 							elif nash.y < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 				
 							# print "spider.x = ", spider.x
@@ -752,58 +759,58 @@ while True:
 						if rxvt.force_field_enabled == False:
 							if rxvt.x - 20 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif rxvt.x + 20 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 								
 							if rxvt.y - 20 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif rxvt.y + 20 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 						else:
 							if rxvt.x - 50 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif rxvt.x + 50 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							
 							#throw spider away from force field
 							elif rxvt.x >= spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							elif rxvt.x < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 								
 							if rxvt.y - 50 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif rxvt.y + 50 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 									
 							#throw spider away from force field
 							elif rxvt.y >= spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 							elif rxvt.y < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 
 				elif who == 2:
@@ -816,58 +823,58 @@ while True:
 						if george.force_field_enabled == False:
 							if george.x - 20 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif george.x + 20 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 								
 							if george.y - 20 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif george.y + 20 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 						else:
 							if george.x - 50 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif george.x + 50 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							
 							#throw spider away from force field
 							elif george.x >= spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							elif george.x < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 								
 							if george.y - 50 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif george.y + 50 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 									
 							#throw spider away from force field
 							elif george.y >= spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 							elif george.y < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 					
 				elif who == 3:
@@ -880,58 +887,58 @@ while True:
 						if james.force_field_enabled == False:
 							if james.x - 20 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif james.x + 20 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 								
 							if james.y - 20 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif james.y + 20 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 						else:
 							if james.x - 50 > spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 							elif james.x + 50 < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.x -= spider.speed
 							
 							#throw spider away from force field
 							elif james.x >= spider.x:
 								if (spider.x + spider.speed) > 28 and (spider.x + spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x - spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x - spider.speed)][int(spider.y)] == 0:
 										spider.x -= spider.speed
 							elif james.x < spider.x:
 								if (spider.x - spider.speed) > 28 and (spider.x - spider.speed) < game.map_size_x - game.safety_border and spider.y > 65 and spider.y < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x + spider.speed][spider.y] == 0:
+									if game.pixel_table[int(spider.x + spider.speed)][int(spider.y)] == 0:
 										spider.x += spider.speed
 								
 							if james.y - 50 > spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 							elif james.y + 50 < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 									
 							#throw spider away from force field
 							elif james.y >= spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y + spider.speed) > 65 and (spider.y + spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y - spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y - spider.speed)] == 0:
 										spider.y -= spider.speed
 							elif james.y < spider.y:
 								if spider.x > 28 and spider.x < game.map_size_x - game.safety_border and (spider.y - spider.speed) > 65 and (spider.y - spider.speed) < game.map_size_y - game.screen_bottom - game.safety_border:
-									if game.pixel_table[spider.x][spider.y + spider.speed] == 0:
+									if game.pixel_table[int(spider.x)][int(spider.y + spider.speed)] == 0:
 										spider.y += spider.speed
 				
 			game_loop = 0
@@ -1221,69 +1228,69 @@ while True:
 		for gigantula in monster.gigantulas:
 			if gigantula.energy > 0:
 				if (gigantula.x + gigantula.offsetX) >= 200 and (gigantula.x + gigantula.offsetX) < (game.map_size_x - 200):
-					if game.pixel_table[gigantula.x + gigantula.offsetX][gigantula.y + gigantula.offsetY] == 0:
+					if game.pixel_table[int(gigantula.x + gigantula.offsetX)][int(gigantula.y + gigantula.offsetY)] == 0:
 						# print "x"
 						# print "gigantula.x + gigantula.offsetX = ", gigantula.x + gigantula.offsetX
 						# print "gigantula.y + gigantula.offsetY = ", gigantula.y + gigantula.offsetY
 						gigantula.x += gigantula.offsetX
 				
 				if (gigantula.y + gigantula.offsetY) >= 200 and (gigantula.y + gigantula.offsetY) < (game.map_size_y - 200 - game.screen_bottom):
-					if game.pixel_table[gigantula.x + gigantula.offsetX][gigantula.y + gigantula.offsetY] == 0:
+					if game.pixel_table[int(gigantula.x + gigantula.offsetX)][int(gigantula.y + gigantula.offsetY)] == 0:
 						# print "y"
 						gigantula.y += gigantula.offsetY
 						
 		for robot in monster.robots:
 			if robot.energy > 0:
 				if (robot.x + robot.offsetX) >= 100 and (robot.x + robot.offsetX) < (game.map_size_x - 100):
-					if game.pixel_table[robot.x + robot.offsetX][robot.y + robot.offsetY] == 0:
+					if game.pixel_table[int(robot.x + robot.offsetX)][int(robot.y + robot.offsetY)] == 0:
 						# print "x"
 						# print "robot.x + robot.offsetX = ", robot.x + robot.offsetX
 						# print "robot.y + robot.offsetY = ", robot.y + robot.offsetY
 						robot.x += robot.offsetX
 				
 				if (robot.y + robot.offsetY) >= 100 and (robot.y + robot.offsetY) < (game.map_size_y - 150 - game.screen_bottom):
-					if game.pixel_table[robot.x + robot.offsetX][robot.y + robot.offsetY] == 0:
+					if game.pixel_table[int(robot.x + robot.offsetX)][int(robot.y + robot.offsetY)] == 0:
 						# print "y"
 						robot.y += robot.offsetY
 						
 		for crane in monster.cranes:
 			if crane.energy > 0:
 				if (crane.x + crane.offsetX) >= 200 and (crane.x + crane.offsetX) < (game.map_size_x - 200):
-					if game.pixel_table[crane.x + 100 + crane.offsetX][crane.y + 100 + crane.offsetY] == 0:
+					if game.pixel_table[int(crane.x + 100 + crane.offsetX)][int(crane.y + 100 + crane.offsetY)] == 0:
 						# print "x"
 						# print "crane.x + crane.offsetX = ", crane.x + crane.offsetX
 						# print "crane.y + crane.offsetY = ", crane.y + crane.offsetY
 						crane.x += crane.offsetX
 				
 				if (crane.y + crane.offsetY) >= 200 and (crane.y + crane.offsetY) < (game.map_size_y - 250 - game.screen_bottom):
-					if game.pixel_table[crane.x + 100 + crane.offsetX][crane.y + 100 + crane.offsetY] == 0:
+					if game.pixel_table[int(crane.x + 100 + crane.offsetX)][int(crane.y + 100 + crane.offsetY)] == 0:
 						# print "y"
 						crane.y += crane.offsetY
 						
 		for hunter in monster.hunters:
 			if hunter.energy > 0:
 				if (hunter.x + hunter.offsetX) >= 200 and (hunter.x + hunter.offsetX) < (game.map_size_x - 200):
-					if game.pixel_table[hunter.x + 100 + hunter.offsetX][hunter.y + 100 + hunter.offsetY] == 0:
+					if game.pixel_table[int(hunter.x + 100 + hunter.offsetX)][int(hunter.y + 100 + hunter.offsetY)] == 0:
 						# print "x"
 						# print "hunter.x + hunter.offsetX = ", hunter.x + hunter.offsetX
 						# print "hunter.y + hunter.offsetY = ", hunter.y + hunter.offsetY
 						hunter.x += hunter.offsetX
 				
 				if (hunter.y + hunter.offsetY) >= 200 and (hunter.y + hunter.offsetY) < (game.map_size_y - 250 - game.screen_bottom):
-					if game.pixel_table[hunter.x + 100 + hunter.offsetX][hunter.y + 100 + hunter.offsetY] == 0:
+					if game.pixel_table[int(hunter.x + 100 + hunter.offsetX)][int(hunter.y + 100 + hunter.offsetY)] == 0:
 						# print "y"
 						hunter.y += hunter.offsetY
 						
 		if game.boss.energy > 0:
 			if (game.boss.x + game.boss.offsetX) >= 200 and (game.boss.x + game.boss.offsetX) < (game.map_size_x - 200):
-				if game.pixel_table[game.boss.x + 100 + game.boss.offsetX][game.boss.y + 100 + game.boss.offsetY] == 0:
+				if game.pixel_table[int(game.boss.x + 100 + game.boss.offsetX)][int(game.boss.y + 100 + game.boss.offsetY)] == 0:
 					# print "x"
 					# print "game.boss.x + game.boss.offsetX = ", game.boss.x + game.boss.offsetX
 					# print "game.boss.y + game.boss.offsetY = ", game.boss.y + game.boss.offsetY
 					game.boss.x += game.boss.offsetX
 			
 			if (game.boss.y + game.boss.offsetY) >= 200 and (game.boss.y + game.boss.offsetY) < (game.map_size_y - 250 - game.screen_bottom):
-				if game.pixel_table[game.boss.x + 100 + game.boss.offsetX][game.boss.y + 100 + game.boss.offsetY] == 0:
+				if game.pixel_table[int(game.boss.x + 100 + game.boss.offsetX)][int(game.boss.y + 100 + game.boss.offsetY)] == 0:
 					# print "y"
 					game.boss.y += game.boss.offsetY
 		
@@ -1608,7 +1615,7 @@ while True:
 						and nash.x + nash.offsetX - game.x < game.map_size_x \
 						and nash.y + nash.offsetY - game.y >= 0 \
 						and nash.y + nash.offsetY - game.y < game.map_size_y - game.screen_bottom_player:
-						if game.pixel_table[nash.x + nash.offsetX - game.x][nash.y + nash.offsetY - game.y] == 0:
+						if game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.x - nash.offsetX <= 0 and game.x - nash.offsetX > (-game.map_size_x + resolution[0]) and nash.x >= resolution[0] / 2 - 10 and nash.x <= resolution[0] / 2 + 10:
 								
 								nash.x = resolution[0] / 2
@@ -1617,7 +1624,7 @@ while True:
 							else:
 								nash.x += nash.offsetX
 						
-						elif game.pixel_table[nash.x + nash.offsetX - game.x][nash.y - game.y] == 0:
+						elif game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y - game.y)] == 0:
 							if game.x - nash.offsetX <= 0 and game.x - nash.offsetX > (-game.map_size_x + resolution[0]) and nash.x >= resolution[0] / 2 - 10 and nash.x <= resolution[0] / 2 + 10:
 								
 								nash.x = resolution[0] / 2
@@ -1631,7 +1638,7 @@ while True:
 						and nash.x + nash.offsetX - game.x < game.map_size_x \
 						and nash.y + nash.offsetY - game.y >= 0 \
 						and nash.y + nash.offsetY - game.y < game.map_size_y - game.screen_bottom_player:
-						if game.pixel_table[nash.x + nash.offsetX - game.x][nash.y + nash.offsetY - game.y] == 0:
+						if game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.y - nash.offsetY <= 0 and game.y - nash.offsetY > (-game.map_size_y + resolution[1]) and nash.y >= resolution[1] / 2 - 10 and nash.y <= resolution[1] / 2 + 10:
 								
 								nash.y = resolution[1] / 2
@@ -1640,7 +1647,7 @@ while True:
 							else:
 								nash.y += nash.offsetY
 
-						elif game.pixel_table[nash.x - game.x][nash.y + nash.offsetY - game.y] == 0:
+						elif game.pixel_table[int(nash.x - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.y - nash.offsetY <= 0 and game.y - nash.offsetY > (-game.map_size_y + resolution[1]) and nash.y >= resolution[1] / 2 - 10 and nash.y <= resolution[1] / 2 + 10:
 								
 								nash.y = resolution[1] / 2
@@ -1669,7 +1676,7 @@ while True:
 						and nash.x + nash.offsetX - game.x < game.map_size_x \
 						and nash.y + nash.offsetY - game.y >= 0 \
 						and nash.y + nash.offsetY - game.y < game.map_size_y - game.screen_bottom_player:
-						if game.pixel_table[nash.x + nash.offsetX - game.x][nash.y + nash.offsetY - game.y] == 0:
+						if game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.x - nash.offsetX <= 0 and game.x - nash.offsetX > (-game.map_size_x + resolution[0]) \
 							and ((nash.offsetX > 0 and center_x >= resolution[0] / 2 - 10) or (nash.offsetX < 0 and center_x <= resolution[0] / 2 + 10)):
 								
@@ -1679,7 +1686,7 @@ while True:
 							else:
 								nash.x += nash.offsetX
 						
-						elif game.pixel_table[nash.x + nash.offsetX - game.x][nash.y - game.y] == 0:
+						elif game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y - game.y)] == 0:
 							if game.x - nash.offsetX <= 0 and game.x - nash.offsetX > (-game.map_size_x + resolution[0]) \
 							and ((nash.offsetX > 0 and center_x >= resolution[0] / 2 - 10) or (nash.offsetX < 0 and center_x <= resolution[0] / 2 + 10)):
 								
@@ -1694,7 +1701,7 @@ while True:
 						and nash.x + nash.offsetX - game.x < game.map_size_x \
 						and nash.y + nash.offsetY - game.y >= 0 \
 						and nash.y + nash.offsetY - game.y < game.map_size_y - game.screen_bottom_player:
-						if game.pixel_table[nash.x + nash.offsetX - game.x][nash.y + nash.offsetY - game.y] == 0:
+						if game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.y - nash.offsetY <= 0 and game.y - nash.offsetY > (-game.map_size_y + resolution[1]) \
 							and ((nash.offsetY > 0 and center_y >= resolution[1] / 2 - 10) or (nash.offsetY < 0 and center_y <= resolution[1] / 2 + 10)):
 								
@@ -1704,7 +1711,7 @@ while True:
 							else:
 								nash.y += nash.offsetY
 
-						elif game.pixel_table[nash.x - game.x][nash.y + nash.offsetY - game.y] == 0:
+						elif game.pixel_table[int(nash.x - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.y - nash.offsetY <= 0 and game.y - nash.offsetY > (-game.map_size_y + resolution[1]) \
 							and ((nash.offsetY > 0 and center_y >= resolution[1] / 2 - 10) or (nash.offsetY < 0 and center_y <= resolution[1] / 2 + 10)):
 								
@@ -1740,7 +1747,7 @@ while True:
 						and nash.x + nash.offsetX - game.x < game.map_size_x \
 						and nash.y + nash.offsetY - game.y >= 0 \
 						and nash.y + nash.offsetY - game.y < game.map_size_y - game.screen_bottom_player:
-						if game.pixel_table[nash.x + nash.offsetX - game.x][nash.y + nash.offsetY - game.y] == 0:
+						if game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.x - nash.offsetX < 0 and game.x - nash.offsetX > (-game.map_size_x + resolution[0]) and center_x >= resolution[0] / 2 - 10 and center_x <= resolution[0] / 2 + 10:
 								
 								game.x -= nash.offsetX
@@ -1750,7 +1757,7 @@ while True:
 							else:
 								nash.x += nash.offsetX
 						
-						elif game.pixel_table[nash.x + nash.offsetX - game.x][nash.y - game.y] == 0:
+						elif game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y - game.y)] == 0:
 							if game.x - nash.offsetX < 0 and game.x - nash.offsetX > (-game.map_size_x + resolution[0]) and center_x >= resolution[0] / 2 - 10 and center_x <= resolution[0] / 2 + 10:
 								
 								game.x -= nash.offsetX
@@ -1765,7 +1772,7 @@ while True:
 						and nash.x + nash.offsetX - game.x < game.map_size_x \
 						and nash.y + nash.offsetY - game.y >= 0 \
 						and nash.y + nash.offsetY - game.y < game.map_size_y - game.screen_bottom_player:
-						if game.pixel_table[nash.x + nash.offsetX - game.x][nash.y + nash.offsetY - game.y] == 0:
+						if game.pixel_table[int(nash.x + nash.offsetX - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.y - nash.offsetY < 0 and game.y - nash.offsetY > (-game.map_size_y + resolution[1]) and center_y >= resolution[1] / 2 - 10 and center_y <= resolution[1] / 2 + 10:
 								
 								game.y -= nash.offsetY
@@ -1775,7 +1782,7 @@ while True:
 							else:
 								nash.y += nash.offsetY
 
-						elif game.pixel_table[nash.x - game.x][nash.y + nash.offsetY - game.y] == 0:
+						elif game.pixel_table[int(nash.x - game.x)][int(nash.y + nash.offsetY - game.y)] == 0:
 							if game.y - nash.offsetY < 0 and game.y - nash.offsetY > (-game.map_size_y + resolution[1]) and center_y >= resolution[1] / 2 - 10 and center_y <= resolution[1] / 2 + 10:
 								
 								game.y -= nash.offsetY
@@ -1969,27 +1976,28 @@ while True:
 			if nash.fire == True and not nash.in_mass:
 				if nash.current_weapon == "laser":
 					try:
-						thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
+						_thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
 					except:
-						print "Error: unable to start flamethrower thread"
+						print("Error: unable to start laser thread")
 				elif nash.current_weapon == "flamethrower":
 					try:
-						thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
+						#thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
+						_thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
 					except:
-						print "Error: unable to start flamethrower thread"
+						print("Error: unable to start flamethrower thread")
 				elif nash.current_weapon == "freezer":
 					try:
 						if nash.slot1 == 0:
-							thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game,  global_player, 'nash'))
+							_thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game,  global_player, 'nash'))
 						elif nash.slot1 == 1:
-							thread.start_new_thread(long_range_freezer, ("Thread-freezer", 0.001, screen, freezer_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game,  global_player, 'nash'))
+							_thread.start_new_thread(long_range_freezer, ("Thread-freezer", 0.001, screen, freezer_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game,  global_player, 'nash'))
 					except:
-						print "Error: unable to start freezer thread"
+						print("Error: unable to start freezer thread")
 				elif nash.current_weapon == "plasma":
 					try:
-						thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game,  global_player, 'nash'))
+						_thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, nash.x, nash.y, nash.angle, nash.ammo, monster, game,  global_player, 'nash'))
 					except:
-						print "Error: unable to start plasma thread"
+						print("Error: unable to start plasma thread")
 					
 		if rxvt.alive():
 			if game.bot_movement_loop == game.bot_movement_loop_max:
@@ -2052,9 +2060,9 @@ while True:
 
 				rxvt.ammo['vortex'] -= 1
 				try:
-					thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, rxvt.x, rxvt.y, rxvt.angle, rxvt.ammo, monster, game,  global_player, 'rxvt'))
+					_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, rxvt.x, rxvt.y, rxvt.angle, rxvt.ammo, monster, game,  global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt vortex for nash thread"
+					print("Error: unable to start rxvt vortex for nash thread")
 			
 			#George last hope!
 			if george.energy < 15 and george.force_field < 15 and rxvt.ammo['vortex'] > 0 and rxvt.vortex_launched == False:
@@ -2070,9 +2078,9 @@ while True:
 
 				rxvt.ammo['vortex'] -= 1
 				try:
-					thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, rxvt.x, rxvt.y, rxvt.angle, rxvt.ammo, monster, game,  global_player, 'rxvt'))
+					_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, rxvt.x, rxvt.y, rxvt.angle, rxvt.ammo, monster, game,  global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt vortex for george thread"
+					print("Error: unable to start rxvt vortex for george thread")
 					
 			#James last hope!
 			if james.energy < 15 and james.force_field < 15 and rxvt.ammo['vortex'] > 0 and rxvt.vortex_launched == False:
@@ -2088,35 +2096,35 @@ while True:
 
 				rxvt.ammo['vortex'] -= 1
 				try:
-					thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, rxvt.x, rxvt.y, rxvt.angle, rxvt.ammo, monster, game,  global_player, 'rxvt'))
+					_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, rxvt.x, rxvt.y, rxvt.angle, rxvt.ammo, monster, game,  global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt vortex for james thread"
+					print("Error: unable to start rxvt vortex for james thread")
 				
 			#fire weapon our brave rxvt!
 			if rxvt.ammo['flamethrower'] > 0:
 				rxvt.current_weapon = "flamethrower"
 				try:
-					thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
+					_thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt flamethrower thread"
+					print("Error: unable to start rxvt flamethrower thread")
 			elif rxvt.ammo['plasma'] > 0:
 				rxvt.current_weapon = "plasma"
 				try:
-					thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
+					_thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt plasma thread"
+					print("Error: unable to start rxvt plasma thread")
 			elif rxvt.ammo['laser'] > 0:
 				rxvt.current_weapon = "laser"
 				try:
-					thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
+					_thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt laser thread"
+					print("Error: unable to start rxvt laser thread")
 			elif rxvt.ammo['freezer'] > 0:
 				rxvt.current_weapon = "freezer"
 				try:
-					thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
+					_thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, rxvt.x + game.x, rxvt.y + game.y, rxvt.angle, rxvt.ammo, monster, game, global_player, 'rxvt'))
 				except:
-					print "Error: unable to start rxvt freezer thread"
+					print("Error: unable to start rxvt freezer thread")
 					
 					
 			#fire our bad monsters :(
@@ -2127,9 +2135,9 @@ while True:
 				for robot in monster.robots:
 					if robot.energy > 0:
 						try:
-							thread.start_new_thread(robot_weapon, ("Thread-robot_weapon", 0.01, screen, laser_sound, robot.x + game.x, robot.y + game.y, monster, game, global_player, pain_sound))
+							_thread.start_new_thread(robot_weapon, ("Thread-robot_weapon", 0.01, screen, laser_sound, robot.x + game.x, robot.y + game.y, monster, game, global_player, pain_sound))
 						except:
-							print "Error: unable to start robot weapon thread"
+							print("Error: unable to start robot weapon thread")
 			else:
 				robot_fire_loop += 1
 				
@@ -2137,9 +2145,9 @@ while True:
 				if game.boss.fire_loop >= game.boss.fire_loop_max:
 					game.boss.fire_loop = 0
 					try:
-						thread.start_new_thread(boss_weapon, ("Thread-boss_weapon", 0.003, screen, laser_sound, game.boss.x + game.x, game.boss.y + game.y, monster, game, global_player, pain_sound))
+						_thread.start_new_thread(boss_weapon, ("Thread-boss_weapon", 0.003, screen, laser_sound, game.boss.x + game.x, game.boss.y + game.y, monster, game, global_player, pain_sound))
 					except:
-						print "Error: unable to start boss weapon thread"
+						print("Error: unable to start boss weapon thread")
 				else:
 					game.boss.fire_loop += 1
 					
@@ -2148,9 +2156,9 @@ while True:
 					if hunter.fire_loop >= 10:			
 						hunter.fire_loop = 0
 						try:
-							thread.start_new_thread(boss_weapon, ("Thread-boss_weapon", 0.01, screen, laser_sound, hunter.x + game.x, hunter.y + game.y, monster, game, global_player, pain_sound))
+							_thread.start_new_thread(boss_weapon, ("Thread-boss_weapon", 0.01, screen, laser_sound, hunter.x + game.x, hunter.y + game.y, monster, game, global_player, pain_sound))
 						except:
-							print "Error: unable to start hunter weapon thread"
+							print("Error: unable to start hunter weapon thread")
 					else:
 						hunter.fire_loop += 1
 					
@@ -2189,7 +2197,7 @@ while True:
 						and george.x + george.offsetX - game.x < game.map_size_x \
 						and george.y + george.offsetY - game.y >= 0 \
 						and george.y + george.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[george.x + george.offsetX - game.x][george.y + george.offsetY - game.y] == 0:
+						if game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.x - george.offsetX <= 0 and game.x - george.offsetX > (-game.map_size_x + resolution[0]) and george.x >= resolution[0] / 2 - 10 and george.x <= resolution[0] / 2 + 10:
 								
 								george.x = resolution[0] / 2
@@ -2198,7 +2206,7 @@ while True:
 							else:
 								george.x += george.offsetX
 						
-						elif game.pixel_table[george.x + george.offsetX - game.x][george.y - game.y] == 0:
+						elif game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y - game.y)] == 0:
 							if game.x - george.offsetX <= 0 and game.x - george.offsetX > (-game.map_size_x + resolution[0]) and george.x >= resolution[0] / 2 - 10 and george.x <= resolution[0] / 2 + 10:
 								
 								george.x = resolution[0] / 2
@@ -2212,7 +2220,7 @@ while True:
 						and george.x + george.offsetX - game.x < game.map_size_x \
 						and george.y + george.offsetY - game.y >= 0 \
 						and george.y + george.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[george.x + george.offsetX - game.x][george.y + george.offsetY - game.y] == 0:
+						if game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.y - george.offsetY <= 0 and game.y - george.offsetY > (-game.map_size_y + resolution[1]) and george.y >= resolution[1] / 2 - 10 and george.y <= resolution[1] / 2 + 10:
 								
 								george.y = resolution[1] / 2
@@ -2221,7 +2229,7 @@ while True:
 							else:
 								george.y += george.offsetY
 
-						elif game.pixel_table[george.x - game.x][george.y + george.offsetY - game.y] == 0:
+						elif game.pixel_table[int(george.x - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.y - george.offsetY <= 0 and game.y - george.offsetY > (-game.map_size_y + resolution[1]) and george.y >= resolution[1] / 2 - 10 and george.y <= resolution[1] / 2 + 10:
 								
 								george.y = resolution[1] / 2
@@ -2238,7 +2246,7 @@ while True:
 						and george.x + george.offsetX - game.x < game.map_size_x \
 						and george.y + george.offsetY - game.y >= 0 \
 						and george.y + george.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[george.x + george.offsetX - game.x][george.y + george.offsetY - game.y] == 0:
+						if game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.x - george.offsetX <= 0 and game.x - george.offsetX > (-game.map_size_x + resolution[0]) \
 							and ((george.offsetX > 0 and center_x >= resolution[0] / 2 - 10) or (george.offsetX < 0 and center_x <= resolution[0] / 2 + 10)):
 											
@@ -2248,7 +2256,7 @@ while True:
 							else:
 								george.x += george.offsetX
 						
-						elif game.pixel_table[george.x + george.offsetX - game.x][george.y - game.y] == 0:
+						elif game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y - game.y)] == 0:
 							if game.x - george.offsetX <= 0 and game.x - george.offsetX > (-game.map_size_x + resolution[0]) \
 							and ((george.offsetX > 0 and center_x >= resolution[0] / 2 - 10) or (george.offsetX < 0 and center_x <= resolution[0] / 2 + 10)):
 									
@@ -2263,7 +2271,7 @@ while True:
 						and george.x + george.offsetX - game.x < game.map_size_x \
 						and george.y + george.offsetY - game.y >= 0 \
 						and george.y + george.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[george.x + george.offsetX - game.x][george.y + george.offsetY - game.y] == 0:
+						if game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.y - george.offsetY <= 0 and game.y - george.offsetY > (-game.map_size_y + resolution[1]) \
 							and ((george.offsetY > 0 and center_y >= resolution[1] / 2 - 10) or (george.offsetY < 0 and center_y <= resolution[1] / 2 + 10)):
 							
@@ -2273,7 +2281,7 @@ while True:
 							else:
 								george.y += george.offsetY
 
-						elif game.pixel_table[george.x - game.x][george.y + george.offsetY - game.y] == 0:
+						elif game.pixel_table[int(george.x - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.y - george.offsetY <= 0 and game.y - george.offsetY > (-game.map_size_y + resolution[1]) \
 							and ((george.offsetY > 0 and center_y >= resolution[1] / 2 - 10) or (george.offsetY < 0 and center_y <= resolution[1] / 2 + 10)):
 							
@@ -2308,7 +2316,7 @@ while True:
 						and george.x + george.offsetX - game.x < game.map_size_x \
 						and george.y + george.offsetY - game.y >= 0 \
 						and george.y + george.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[george.x + george.offsetX - game.x][george.y + george.offsetY - game.y] == 0:
+						if game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.x - george.offsetX < 0 and game.x - george.offsetX > (-game.map_size_x + resolution[0]) and center_x >= resolution[0] / 2 - 10 and center_x <= resolution[0] / 2 + 10:
 							# if game.x - george.offsetX < 0 and game.x - george.offsetX > (-4000 + resolution[0]):
 								
@@ -2319,7 +2327,7 @@ while True:
 							else:
 								george.x += george.offsetX
 						
-						elif game.pixel_table[george.x + george.offsetX - game.x][george.y - game.y] == 0:
+						elif game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y - game.y)] == 0:
 							if game.x - george.offsetX < 0 and game.x - george.offsetX > (-game.map_size_x + resolution[0]) and center_x >= resolution[0] / 2 - 10 and center_x <= resolution[0] / 2 + 10:
 							# if game.x - george.offsetX < 0 and game.x - george.offsetX > (-4000 + resolution[0]):
 								
@@ -2335,7 +2343,7 @@ while True:
 						and george.x + george.offsetX - game.x < game.map_size_x \
 						and george.y + george.offsetY - game.y >= 0 \
 						and george.y + george.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[george.x + george.offsetX - game.x][george.y + george.offsetY - game.y] == 0:
+						if game.pixel_table[int(george.x + george.offsetX - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.y - george.offsetY < 0 and game.y - george.offsetY > (-game.map_size_y + resolution[1]) and center_y >= resolution[1] / 2 - 10 and center_y <= resolution[1] / 2 + 10:
 							# if game.y - george.offsetY < 0 and game.y - george.offsetY > (-4000 + resolution[1]):
 								
@@ -2346,7 +2354,7 @@ while True:
 							else:
 								george.y += george.offsetY
 
-						elif game.pixel_table[george.x - game.x][george.y + george.offsetY - game.y] == 0:
+						elif game.pixel_table[int(george.x - game.x)][int(george.y + george.offsetY - game.y)] == 0:
 							if game.y - george.offsetY < 0 and game.y - george.offsetY > (-game.map_size_y + resolution[1]) and center_y >= resolution[1] / 2 - 10 and center_y <= resolution[1] / 2 + 10:
 							# if game.y - george.offsetY < 0 and game.y - george.offsetY > (-4000 + resolution[1]):
 								
@@ -2539,24 +2547,24 @@ while True:
 			if george.fire == True and not george.in_mass:
 				if george.current_weapon == "laser":
 					try:
-						thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+						_thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 					except:
-						print "Error: unable to start flamethrower thread"
+						print("Error: unable to start flamethrower thread")
 				elif george.current_weapon == "flamethrower":
 					try:
-						thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+						_thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 					except:
-						print "Error: unable to start flamethrower thread"
+						print("Error: unable to start flamethrower thread")
 				elif george.current_weapon == "freezer":
 					try:
-						thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+						_thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 					except:
-						print "Error: unable to start freezer thread"
+						print("Error: unable to start freezer thread")
 				elif george.current_weapon == "plasma":
 					try:
-						thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+						_thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 					except:
-						print "Error: unable to start plasma thread"
+						print("Error: unable to start plasma thread")
 						
 		if james.alive():
 			if not nash.alive() and not george.alive():
@@ -2567,7 +2575,7 @@ while True:
 						and james.x + james.offsetX - game.x < game.map_size_x \
 						and james.y + james.offsetY - game.y >= 0 \
 						and james.y + james.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[james.x + james.offsetX - game.x][james.y + james.offsetY - game.y] == 0:
+						if game.pixel_table[int(james.x + james.offsetX - game.x)][int(james.y + james.offsetY - game.y)] == 0:
 							if game.x - james.offsetX < 0 and game.x - james.offsetX > (-game.map_size_x + resolution[0]) and james.x >= resolution[0] / 2 - 10 and james.x <= resolution[0] / 2 + 10:
 								
 								james.x = resolution[0] / 2
@@ -2576,7 +2584,7 @@ while True:
 							else:
 								james.x += james.offsetX
 						
-						elif game.pixel_table[james.x + james.offsetX - game.x][james.y - game.y] == 0:
+						elif game.pixel_table[int(james.x + james.offsetX - game.x)][int(james.y - game.y)] == 0:
 							if game.x - james.offsetX < 0 and game.x - james.offsetX > (-game.map_size_x + resolution[0]) and james.x >= resolution[0] / 2 - 10 and james.x <= resolution[0] / 2 + 10:
 								
 								james.x = resolution[0] / 2
@@ -2590,7 +2598,7 @@ while True:
 						and james.x + james.offsetX - game.x < game.map_size_x \
 						and james.y + james.offsetY - game.y >= 0 \
 						and james.y + james.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[james.x + james.offsetX - game.x][james.y + james.offsetY - game.y] == 0:
+						if game.pixel_table[int(james.x + james.offsetX - game.x)][int(james.y + james.offsetY - game.y)] == 0:
 							if game.y - james.offsetY < 0 and game.y - james.offsetY > (-game.map_size_y + resolution[1]) and james.y >= resolution[1] / 2 - 10 and james.y <= resolution[1] / 2 + 10:
 								
 								james.y = resolution[1] / 2
@@ -2599,7 +2607,7 @@ while True:
 							else:
 								james.y += james.offsetY
 
-						elif game.pixel_table[james.x - game.x][james.y + james.offsetY - game.y] == 0:
+						elif game.pixel_table[int(james.x - game.x)][int(james.y + james.offsetY - game.y)] == 0:
 							if game.y - james.offsetY < 0 and game.y - james.offsetY > (-game.map_size_y + resolution[1]) and james.y >= resolution[1] / 2 - 10 and james.y <= resolution[1] / 2 + 10:
 								
 								james.y = resolution[1] / 2
@@ -2632,7 +2640,7 @@ while True:
 						and james.x + james.offsetX - game.x < game.map_size_x \
 						and james.y + james.offsetY - game.y >= 0 \
 						and james.y + james.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[james.x + james.offsetX - game.x][james.y + james.offsetY - game.y] == 0:
+						if game.pixel_table[int(james.x + james.offsetX - game.x)][int(james.y + james.offsetY - game.y)] == 0:
 							if game.x - james.offsetX < 0 and game.x - james.offsetX > (-game.map_size_x + resolution[0]) and center_x >= resolution[0] / 2 - 10 and center_x <= resolution[0] / 2 + 10:
 								
 								game.x -= james.offsetX
@@ -2642,7 +2650,7 @@ while True:
 							else:
 								james.x += james.offsetX
 						
-						elif game.pixel_table[james.x + james.offsetX - game.x][james.y - game.y] == 0:
+						elif game.pixel_table[int(james.x + james.offsetX - game.x)][int(james.y - game.y)] == 0:
 							if game.x - james.offsetX < 0 and game.x - james.offsetX > (-game.map_size_x + resolution[0]) and center_x >= resolution[0] / 2 - 10 and center_x <= resolution[0] / 2 + 10:
 								
 								game.x -= james.offsetX
@@ -2657,7 +2665,7 @@ while True:
 						and james.x + james.offsetX - game.x < game.map_size_x \
 						and james.y + james.offsetY - game.y >= 0 \
 						and james.y + james.offsetY - game.y < game.map_size_y:
-						if game.pixel_table[james.x + james.offsetX - game.x][james.y + james.offsetY - game.y] == 0:
+						if game.pixel_table[int(james.x + james.offsetX - game.x)][int(james.y + james.offsetY - game.y)] == 0:
 							if game.y - james.offsetY < 0 and game.y - james.offsetY > (-game.map_size_y + resolution[1]) and center_y >= resolution[1] / 2 - 10 and center_y <= resolution[1] / 2 + 10:
 								
 								game.y -= james.offsetY
@@ -2667,7 +2675,7 @@ while True:
 							else:
 								james.y += james.offsetY
 
-						elif game.pixel_table[james.x - game.x][james.y + james.offsetY - game.y] == 0:
+						elif game.pixel_table[int(james.x - game.x)][int(james.y + james.offsetY - game.y)] == 0:
 							# james.offsetX = 0
 							if game.y - james.offsetY < 0 and game.y - james.offsetY > (-game.map_size_y + resolution[1]) and center_y >= resolution[1] / 2 - 10 and center_y <= resolution[1] / 2 + 10:
 								
@@ -2860,24 +2868,24 @@ while True:
 			if james.fire == True and not george.in_mass:
 				if james.current_weapon == "laser":
 					try:
-						thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
+						_thread.start_new_thread(laser, ("Thread-laser", 0.001, screen, laser_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
 					except:
-						print "Error: unable to start flamethrower thread"
+						print("Error: unable to start flamethrower thread")
 				elif james.current_weapon == "flamethrower":
 					try:
-						thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
+						_thread.start_new_thread(flamethrower, ("Thread-flamethrower", 0.001, screen, flamethrower_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
 					except:
-						print "Error: unable to start flamethrower thread"
+						print("Error: unable to start flamethrower thread")
 				elif james.current_weapon == "freezer":
 					try:
-						thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
+						_thread.start_new_thread(freezer, ("Thread-freezer", 0.001, screen, freezer_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
 					except:
-						print "Error: unable to start freezer thread"
+						print("Error: unable to start freezer thread")
 				elif james.current_weapon == "plasma":
 					try:
-						thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
+						_thread.start_new_thread(plasma, ("Thread-plasma", 0.001, screen, plasma_sound, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
 					except:
-						print "Error: unable to start plasma thread"		
+						print("Error: unable to start plasma thread")
 				
 		if nash.alive() or george.alive() or james.alive():
 		
@@ -4989,9 +4997,9 @@ while True:
 
 						nash.ammo['vortex'] -= 1
 						try:
-							thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'james'))
+							_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'james'))
 						except:
-							print "Error: unable to start vortex thread"
+							print("Error: unable to start vortex thread")
 
 			else: # 'PC TWIN SHOCK'
 				if joy1.get_button(1) != 0:
@@ -5089,9 +5097,9 @@ while True:
 
 						nash.ammo['vortex'] -= 1
 						try:
-							thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
+							_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
 						except:
-							print "Error: unable to start vortex thread"
+							print("Error: unable to start vortex thread")
 				
 				# if joy1.get_button(6) != 0 or joy1.get_button(7) != 0:
 					# sys.exit()
@@ -5168,9 +5176,9 @@ while True:
 
 					nash.ammo['vortex'] -= 1
 					try:
-						thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
+						_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
 					except:
-						print "Error: unable to start nash vortex thread"
+						print("Error: unable to start nash vortex thread")
 		elif game.nash_pad == False and game.george_pad == False and game.number_of_players == 2:
 			#UP
 			if event.type == KEYDOWN and event.key == K_t:
@@ -5243,9 +5251,9 @@ while True:
 
 					nash.ammo['vortex'] -= 1
 					try:
-						thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
+						_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, nash.x, nash.y, nash.angle, nash.ammo, monster, game, global_player, 'nash'))
 					except:
-						print "Error: unable to start nash vortex thread"
+						print("Error: unable to start nash vortex thread")
 						
 		#George player directions:
 		if game.number_of_players > 1 and game.george_pad == True:
@@ -5376,9 +5384,9 @@ while True:
 
 						george.ammo['vortex'] -= 1
 						try:
-							thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+							_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 						except:
-							print "Error: unable to start vortex thread"
+							print("Error: unable to start vortex thread")
 				
 				# if joy2.get_button(6) != 0 or joy2.get_button(7) != 0:
 					# sys.exit()
@@ -5479,9 +5487,9 @@ while True:
 
 						george.ammo['vortex'] -= 1
 						try:
-							thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+							_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 						except:
-							print "Error: unable to start vortex thread"
+							print("Error: unable to start vortex thread")
 				
 		elif game.number_of_players > 1 and game.george_pad == False and game.nash_pad == True:
 			#UP
@@ -5555,9 +5563,9 @@ while True:
 
 					george.ammo['vortex'] -= 1
 					try:
-						thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+						_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 					except:
-						print "Error: unable to start George vortex thread"
+						print("Error: unable to start George vortex thread")
 		
 		elif game.number_of_players == 2 and game.george_pad == False and game.nash_pad == False:
 			#UP
@@ -5631,9 +5639,9 @@ while True:
 
 					george.ammo['vortex'] -= 1
 					try:
-						thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
+						_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, george.x, george.y, george.angle, george.ammo, monster, game, global_player, 'george'))
 					except:
-						print "Error: unable to start George vortex thread"
+						print("Error: unable to start George vortex thread")
 		
 		
 		if game.number_of_players > 2:
@@ -5709,7 +5717,7 @@ while True:
 
 					james.ammo['vortex'] -= 1
 					try:
-						thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
+						_thread.start_new_thread(vortex, ("Thread-vortex", 0.001, screen, james.x, james.y, james.angle, james.ammo, monster, game, global_player, 'james'))
 					except:
-						print "Error: unable to start james vortex thread"
+						print("Error: unable to start james vortex thread")
 			

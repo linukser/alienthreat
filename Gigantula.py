@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 
@@ -12,7 +12,8 @@ class Gigantula:
 	energy = 100
 	armor = 200
 	speed = 5
-	base_decay = decay = 500 #time after gigantula corpse will disappear
+	#base_decay = decay = 500 #time after gigantula corpse will disappear
+	base_decay = decay = 150 #time after gigantula corpse will disappear
 	model = None
 	dead_model = None
 	death_sound_played = False

@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 
@@ -10,9 +10,11 @@ def load_sound(name):
     fullname = os.path.join('data/sounds', name)
     try:
         sound = pygame.mixer.Sound(fullname)
-    except pygame.error, message:
-        print 'Cannot load sound:', fullname
-        raise SystemExit, message
+#    except(pygame.error, message):
+    except pygame.error:
+        print('Cannot load sound:', fullname)
+#        raise(SystemExit, message)
+        raise SystemExit
     return sound
 	
 def convert_angle(angle):

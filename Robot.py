@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 
@@ -12,7 +12,8 @@ class Robot:
 	energy = 100
 	armor = 250.0
 	speed = 2
-	base_decay = decay = 300 #time after robot corpse will disappear
+	#base_decay = decay = 300 #time after robot corpse will disappear
+	base_decay = decay = 150 #time after robot corpse will disappear
 	model = None
 	dead_model = None
 	death_sound_played = False

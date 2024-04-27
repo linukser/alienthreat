@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 
@@ -11,7 +11,8 @@ class Spider:
 	energy = 100
 	armor = 15
 	speed = 7
-	base_decay = decay = 300 #time after spider corpse will disappear
+	#base_decay = decay = 300 #time after spider corpse will disappear
+	base_decay = decay = 150 #time after spider corpse will disappear
 	model = None
 	dead_model = None
 	death_sound_played = False

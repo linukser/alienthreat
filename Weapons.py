@@ -24,7 +24,7 @@ def flamethrower(threadName, delay, screen, flamethrower_sound, x, y, angle, amm
 					new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 
 					if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-						if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+						if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 							if disable > 0:
 								disable -= 1
 							else:
@@ -47,7 +47,7 @@ def flamethrower(threadName, delay, screen, flamethrower_sound, x, y, angle, amm
 					new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 					
 					if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-						if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+						if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 							if disable > 0:
 								disable -= 1
 							else:
@@ -71,7 +71,7 @@ def flamethrower(threadName, delay, screen, flamethrower_sound, x, y, angle, amm
 						new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 						
 						if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-							if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+							if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 								if disable > 0:
 									disable -= 1
 								else:
@@ -95,7 +95,7 @@ def flamethrower(threadName, delay, screen, flamethrower_sound, x, y, angle, amm
 				new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 
 				if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-					if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+					if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 						if disable > 0:
 							disable -= 1
 						else:
@@ -112,7 +112,7 @@ def flamethrower(threadName, delay, screen, flamethrower_sound, x, y, angle, amm
 				new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 				
 				if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-					if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+					if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 						if disable > 0:
 							disable -= 1
 						else:
@@ -130,7 +130,7 @@ def flamethrower(threadName, delay, screen, flamethrower_sound, x, y, angle, amm
 					new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 					
 					if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-						if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+						if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 							if disable > 0:
 								disable -= 1
 							else:
@@ -160,7 +160,7 @@ def freezer(threadName, delay, screen, freezer_sound, x, y, angle, ammo, monster
 				new_y = y + 32 + int(math.cos(angl * 20 * random_distortion) * 25 * i)
 				
 				if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-					if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+					if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 						if disable > 0:
 							disable -= 1
 						else:
@@ -176,7 +176,7 @@ def freezer(threadName, delay, screen, freezer_sound, x, y, angle, ammo, monster
 				new_y = y + 32 + int(math.cos(angl * 20 * random_distortion) * 25 * i)
 
 				if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-					if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+					if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 						if disable > 0:
 							disable -= 1
 						else:
@@ -211,7 +211,7 @@ def long_range_freezer(threadName, delay, screen, freezer_sound, x, y, angle, am
 					new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 10 * (i + 2))
 
 					if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-						if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+						if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 							if disable > 0:
 								disable -= 1
 							else:
@@ -240,7 +240,7 @@ def plasma(threadName, delay, screen, plasma_sound, x, y, angle, ammo, monster, 
 				new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 25 * i)
 				
 				if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-					if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+					if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 						if disable > 0:
 							disable -= 1
 						else:
@@ -260,7 +260,7 @@ def plasma(threadName, delay, screen, plasma_sound, x, y, angle, ammo, monster, 
 				new_y = y + 32 + int(math.cos(angle_conv + random_distortion) * 25 * i)
 
 				if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-					if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+					if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 						if disable > 0:
 							disable -= 1
 						else:
@@ -301,7 +301,7 @@ def laser(threadName, delay, screen, laser_sound, x, y, angle, ammo, monster, ga
 			new_y = y + 32 + int(math.cos(angle_conv) * (i + 3) * 5)
 			
 			if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-				if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+				if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 					if disable > 0:
 						disable -= 1
 					else:
@@ -392,7 +392,7 @@ def robot_weapon(threadName, delay, screen, laser_sound, x, y, monster, game, gl
 			new_y = y + 32 + int(math.cos(angle_conv) * 10 * i)
 			
 			if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-				if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+				if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 					if disable > 0:
 						disable -= 1
 					else:
@@ -413,7 +413,7 @@ def robot_weapon(threadName, delay, screen, laser_sound, x, y, monster, game, gl
 			new_y = y + 32 + int(math.cos(angle_conv) * 10 * i)
 			
 			if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-				if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+				if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 					if disable > 0:
 						disable -= 1
 					else:
@@ -447,7 +447,7 @@ def boss_weapon(threadName, delay, screen, laser_sound, x, y, monster, game, glo
 			new_y = y + game.boss.size / 2 + int(math.cos(angle_conv) * 10 * i)
 			
 			if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-				if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+				if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 					if disable > 0:
 						disable -= 1
 					else:
@@ -469,7 +469,7 @@ def boss_weapon(threadName, delay, screen, laser_sound, x, y, monster, game, glo
 			new_y = y + game.boss.size / 2 + int(math.cos(angle_conv) * 10 * i)
 			
 			if new_x - game.x - 32 >= 0 and new_y - game.y - 32 >= 0:
-				if game.pixel_table[new_x - game.x - 32][new_y - game.y - 32] != 0:
+				if game.pixel_table[int(new_x - game.x - 32)][int(new_y - game.y - 32)] != 0:
 					if disable > 0:
 						disable -= 1
 					else:

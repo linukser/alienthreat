@@ -1,4 +1,4 @@
-import pygame, math, sys, time, thread, os, random
+import pygame, math, sys, time, _thread, os, random
 from pygame.locals import *
 from numpy import *
 
@@ -13,7 +13,8 @@ class Hunter:
 	armor = 700.0
 	speed = 7
 	fire_loop = 0
-	base_decay = decay = 300
+	#base_decay = decay = 300
+	base_decay = decay = 150
 	model = None
 	dead_model = None
 	death_sound_played = False
